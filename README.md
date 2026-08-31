@@ -38,6 +38,7 @@
 - [领域词汇表](CONTEXT.md)
 - [TDH 产品标准名与别名](docs/knowledge/TDH_PRODUCT_ALIASES.csv)
 - [TDH 能力—产品映射初稿](docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv)
+- [TDH 100 条模拟销售问题](docs/knowledge/TDH_SYNTHETIC_TEST_QUESTIONS_100.csv)
 - [协作与任务完成规则](CONTRIBUTING.md)
 - [资料清单模板](docs/templates/source_manifest.csv)
 - [需求与产品映射模板](docs/templates/capability_product_mapping.csv)

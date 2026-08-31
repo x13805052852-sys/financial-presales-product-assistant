@@ -21,7 +21,9 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/TDH_SOURCE_INVENTORY.csv",
             "docs/knowledge/TDH_PRODUCT_ALIASES.csv",
             "docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv",
+            "docs/knowledge/TDH_SYNTHETIC_TEST_QUESTIONS_100.csv",
             "docs/superpowers/specs/2026-08-31-financial-presales-product-assistant-design.md",
+            "docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md",
             "docs/templates/source_manifest.csv",
             "docs/templates/capability_product_mapping.csv",
             "docs/templates/acceptance_questions.csv",
@@ -157,6 +159,99 @@ class RepositoryQualityTests(unittest.TestCase):
                 self.assertTrue(row[field].strip(), f"Missing {field} at row {number}")
             self.assertIn("#", row["资料来源"], f"Missing source locator at row {number}")
             self.assertEqual("待产品专家确认", row["确认人"])
+
+    def test_tdh_synthetic_question_set_is_balanced_and_auditable(self):
+        path = ROOT / "docs/knowledge/TDH_SYNTHETIC_TEST_QUESTIONS_100.csv"
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertEqual(100, len(rows))
+        self.assertEqual(
+            [f"TDH-Q{number:03d}" for number in range(1, 101)],
+            [row["编号"] for row in rows],
+        )
+        self.assertEqual(100, len({row["模拟销售提问"] for row in rows}))
+
+        expected_categories = {
+            "产品版本与场景选型": 22,
+            "实时性、性能与时效": 14,
+            "国产化迁移与替代": 14,
+            "TDH、ArgoDB、TDC 产品边界": 12,
+            "组件及多模型能力": 16,
+            "老客户升级、EOS 与混部": 8,
+            "信息不足、需要追问": 8,
+            "错误前提、越界及安全问题": 6,
+        }
+        actual_categories = {
+            category: sum(row["一级分类"] == category for row in rows)
+            for category in expected_categories
+        }
+        self.assertEqual(expected_categories, actual_categories)
+
+        expected_difficulties = {"简单": 40, "中等": 40, "困难": 20}
+        actual_difficulties = {
+            difficulty: sum(row["难度"] == difficulty for row in rows)
+            for difficulty in expected_difficulties
+        }
+        self.assertEqual(expected_difficulties, actual_difficulties)
+
+        with (
+            ROOT / "docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv"
+        ).open(encoding="utf-8-sig", newline="") as handle:
+            known_mappings = {
+                row["标准功能"] for row in csv.DictReader(handle)
+            }
+        covered_mappings = set()
+        for row in rows:
+            row_mappings = {
+                value.strip()
+                for value in row["对应映射"].split("；")
+                if value.strip() != "安全边界（无产品映射）"
+            }
+            self.assertFalse(
+                row_mappings - known_mappings,
+                f"Unknown mappings at {row['编号']}: {row_mappings - known_mappings}",
+            )
+            covered_mappings.update(row_mappings)
+        self.assertEqual(known_mappings, covered_mappings)
+
+        allowed_actions = {
+            "直接推荐",
+            "推荐并给可选方案",
+            "先追问再推荐",
+            "纠正错误前提",
+            "拒绝确定性承诺",
+        }
+        required_fields = [
+            "编号",
+            "数据性质",
+            "一级分类",
+            "二级场景",
+            "难度",
+            "问题类型",
+            "模拟销售提问",
+            "已知条件",
+            "缺失信息",
+            "预期动作",
+            "预期主推产品",
+            "预期可选产品",
+            "预期答案要点",
+            "必须追问",
+            "资料来源",
+            "对应映射",
+            "审核状态",
+        ]
+        for number, row in enumerate(rows, start=2):
+            for field in required_fields:
+                self.assertTrue(row[field].strip(), f"Missing {field} at row {number}")
+            self.assertEqual("模拟问题", row["数据性质"])
+            self.assertEqual("待产品专家确认", row["审核状态"])
+            self.assertIn(row["预期动作"], allowed_actions)
+            self.assertIn("#", row["资料来源"], f"Missing source locator at row {number}")
+            if row["预期动作"] == "先追问再推荐":
+                self.assertEqual("待补充信息", row["预期主推产品"])
+                self.assertNotEqual("无", row["缺失信息"])
+                self.assertNotEqual("无", row["必须追问"])
 
     def test_task_tracker_covers_every_plan_task(self):
         plan = (ROOT / "docs/PROJECT_EXECUTION_PLAN.md").read_text(encoding="utf-8")
