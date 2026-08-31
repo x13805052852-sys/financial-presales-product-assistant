@@ -9,8 +9,8 @@
 - [ ] D1-03 收集产品方案总表原始 Excel｜证据：
 - [x] D1-04 建立资料清单｜证据：`docs/TDH_SOURCE_INVENTORY.csv`
 - [x] D1-05 标记重复、过期和冲突资料｜证据：`docs/TDH_SOURCE_ASSESSMENT.md`
-- [ ] D1-06 建立产品标准名及别名表｜证据：
-- [ ] D1-07 建立能力—产品映射初稿｜证据：
+- [x] D1-06 建立产品标准名及别名表｜证据：`CONTEXT.md`、`docs/knowledge/TDH_PRODUCT_ALIASES.csv`
+- [x] D1-07 建立能力—产品映射初稿｜证据：`docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv`
 - [ ] D1-08 收集 30 条真实销售需求｜证据：
 - [ ] D1-09 创建 API 模式智能机器人｜证据：
 - [ ] D1-10 创建内部测试群并加入机器人｜证据：

@@ -34,6 +34,9 @@
 - [任务追踪表](docs/TASK_TRACKER.md)
 - [TDH 资料筛选报告](docs/TDH_SOURCE_ASSESSMENT.md)
 - [TDH 逐文件资料清单](docs/TDH_SOURCE_INVENTORY.csv)
+- [领域词汇表](CONTEXT.md)
+- [TDH 产品标准名与别名](docs/knowledge/TDH_PRODUCT_ALIASES.csv)
+- [TDH 能力—产品映射初稿](docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv)
 - [协作与任务完成规则](CONTRIBUTING.md)
 - [资料清单模板](docs/templates/source_manifest.csv)
 - [需求与产品映射模板](docs/templates/capability_product_mapping.csv)
@@ -51,6 +54,8 @@
 8. Scope
 
 最终范围以第 1 天完成的产品资料盘点和产品专家确认结果为准；若某产品没有有效资料，则不进入首版。
+
+当前 TDH 映射仍处于“待产品专家确认”状态，只能用于内部实验和测试，不能直接作为对客承诺。
 
 ## 自动测试
 

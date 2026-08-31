@@ -1,0 +1,33 @@
+标准名称,实体类型,所属对象,英文名或License Code,可识别别名,禁止混用,首版使用规则,资料来源,确认状态
+TDH,产品,,Transwarp Data Hub,"星环大数据基础平台;Transwarp Data Hub;TDH平台",TDH Edition或组件,只在泛指产品线时使用；推荐时尽量落到Edition,TDH 9.5 产品培训.pptx#slide=3,待产品专家确认
+TDH 数据工程版,Edition,TDH,DATA_ENGINEERING,"数据工程版;Inceptor数据工程版;Data Engineering Edition",TDH 数据湖版,不作为新客户默认推荐；仅识别存量或明确低成本传统批处理场景,202512TDH&TDC&TDS销售方案更新202512_v2_价格脱敏.pptx#slide=3-6,待产品专家确认
+TDH 数据湖版,Edition,TDH,DATALAKE,"数据湖版;Inceptor数据湖版;Data Lake Edition;DataLake",TDH 湖仓版,用于海量多类型数据汇聚、存储、批处理和分钟级准实时入湖,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=2,待产品专家确认
+TDH 集市版,Edition,TDH,DATAMART,"集市版;数据集市版;Inceptor集市版;Data Mart Edition;DataMart",TDH 湖仓集一体版,用于交互式分析、即席查询、固定报表和高并发明细查询,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=13,待产品专家确认
+TDH 湖仓版,Edition,TDH,LAKEHOUSE,"湖仓版;湖仓一体版;Inceptor湖仓版;Lakehouse Edition;LakeHouse",TDH 湖仓集一体版,用于数据湖和数据仓库统一以及传统数仓方言/存储过程迁移,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=17,待产品专家确认
+TDH 湖仓集一体版,Edition,TDH,LAKEHOUSE_MART,"湖仓集版;湖仓集一体版;Inceptor湖仓集版;Lakehouse Mart Edition;Lakehouse_Mart",旗舰版或ArgoDB AP,用于一表多用、批流一体、实时增量计算、读写分离和湖上建集,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=20,待产品专家确认
+TDH 标准版,历史Edition,TDH,Standard Edition,"标准版;老标准版",TDH 数据工程版,只用于识别存量客户和升级路径；不向新客户推荐,202512TDH&TDC&TDS销售方案更新202512_v2_价格脱敏.pptx#slide=4-6,待产品专家确认
+TDH 专业版,历史Edition,TDH,Professional Edition,"专业版;老专业版",TDH 数据湖版,只用于识别存量客户和升级路径；不向新客户推荐,202512TDH&TDC&TDS销售方案更新202512_v2_价格脱敏.pptx#slide=4-6,待产品专家确认
+TDH 企业版,历史Edition,TDH,Enterprise Edition,"企业版;老企业版",TDH 湖仓版,只用于识别存量客户和升级路径；不向新客户推荐,202512TDH&TDC&TDS销售方案更新202512_v2_价格脱敏.pptx#slide=4-7,待产品专家确认
+TDH 旗舰版 PLUS,历史Edition,TDH,Flagship Plus Edition,"旗舰版;旗舰PLUS;旗舰版PLUS",TDH 湖仓集一体版,只用于识别存量客户；升级关系不能当作同义词,202512TDH&TDC&TDS销售方案更新202512_v2_价格脱敏.pptx#slide=4-7,待产品专家确认
+ArgoDB,产品,,ArgoDB,"Argo;星环ArgoDB",TDH或ArgoDB Edition,只在泛指数据库产品时使用；推荐时落到AP/TP/HTAP,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=27,待产品专家确认
+ArgoDB AP,Edition,ArgoDB,TDB-ARGO-RT,"ArgoDB AP版;Argo AP;实时分析版;高性能实时数仓数集版",TDH 湖仓集一体版,用于亚秒/秒级实时分析、实时ODS、持续增量计算和核心系统分析下移,TDH&ArgoDB license功能点.xlsx#ArgoDB!A1:D81,待产品专家确认
+ArgoDB TP,Edition,ArgoDB,TP Edition,"ArgoDB TP版;Argo TP;事务版",ArgoDB HTAP,用于高并发强一致OLTP和传统MySQL类事务数据库替代,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=27,待产品专家确认
+ArgoDB HTAP,Edition,ArgoDB,HTAP Edition,"ArgoDB HTAP版;Argo HTAP;HTAP版",ArgoDB AP或TP,用于同一平台同时处理事务和实时分析,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=27,待产品专家确认
+TDC,产品族,,TDC,"星环云原生平台;云原生管理底座",TDH或TDS,用于承载平台管理类推荐；正式中英文全称仍需产品专家确认,202512TDH&TDC&TDS销售方案更新202512_v2_价格脱敏.pptx#slide=10,待产品专家确认
+TDC Platform Service,服务Edition,TDC,Transwarp Cloud-Native Platform Service,"Platform Service;平台服务版;TDC平台服务",TDC Data Services,用于单集群、单租户的云原生管理底座,202512TDH&TDC&TDS销售方案更新202512_v2_价格脱敏.pptx#slide=10-12,待产品专家确认
+TDC Data Services,服务Edition,TDC,Transwarp Cloud-Native Data Services,"Data Services;数据服务版;TDC数据服务",TDC Platform Service,用于多集群、多租户、跨集群部署/共享/调度和自动弹性伸缩,202512TDH&TDC&TDS销售方案更新202512_v2_价格脱敏.pptx#slide=10-12,待产品专家确认
+Inceptor,组件,TDH,Transwarp Inceptor,"关系型分析引擎;Inceptor SQL引擎",TDH Edition,Edition能力主要通过Inceptor体现，但不能把组件名当售卖套餐,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=7,待产品专家确认
+Holodesk,存储引擎,Inceptor,Holodesk,"Holodesk列存;Holodesk行存;湖仓统一存储格式",TDH或Inceptor,不作为独立产品推荐；用于解释湖仓统一存储和行列存能力,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=20,待产品专家确认
+Hyperbase,组件,TDH,Transwarp Hyperbase,"宽表数据库;星环宽表数据库;HBase替代",ArgoDB AP,用于宽表、高并发在线写入和点查；是否随Edition包含需查套餐,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=7,待产品专家确认
+Slipstream,组件,TDH,Transwarp Slipstream,"实时流计算引擎;流计算;实时ETL",ArgoDB增量计算,用于实时监测和实时ETL；不得等同于ArgoDB实时数仓,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=7,待产品专家确认
+Scope,组件,TDH,Transwarp Scope,"分布式搜索引擎;全文检索;日志检索",通用SQL模糊查询,用于全文检索和日志存储分析,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=7,待产品专家确认
+Event Store,组件,TDH,Transwarp Event Store,"EventStore;事件存储库;Kafka",Slipstream,用于事件/消息持久化；流计算需求需同时判断Slipstream,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=40,待产品专家确认
+KeyByte,组件,TDH,Transwarp KeyByte,"Keybyte;键值数据库;Redis能力;高性能缓存",Hyperbase,用于键值访问和缓存类场景,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=7,待产品专家确认
+TimeLyre,组件,TDH,Transwarp TimeLyre,"Timelyre;时序数据库;时序数据",Event Store,用于时序数据存储与分析；采购边界需单独确认,TDH 9.5 产品wiki.pdf#page=3,待产品专家确认
+StellarDB,组件,TDH,Transwarp StellarDB,"图数据库;图数据分析",Hippo,用于图关系存储、分析和可视化；通常需单独采购,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=7-9,待产品专家确认
+Spacture,组件,TDH,Transwarp Spacture,"时空数据库;时空轨迹分析",TimeLyre,用于时空轨迹数据存储与分析,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=7,待产品专家确认
+Hippo,组件,TDH,Transwarp Hippo,"向量数据库;向量检索",StellarDB,用于向量数据存储与分析；采购边界需单独确认,TDH & ArgoDB 售卖版本介绍20250717-v9.4.3.pptx#slide=7,待产品专家确认
+TDFS,基础组件,TDH,Transwarp Distributed File System,"星环分布式文件系统;分布式文件存储",HDFS,作为TDH底层文件存储能力，不单独替代上层Edition推荐,TDH 9.5 产品wiki.pdf#page=3,待产品专家确认
+TDDMS,基础组件,TDH,Transwarp Distributed Data Management System,"星环分布式数据管理系统;分布式数据管理",TDC Data Services,负责TDH内部数据管理；跨集群平台管理推荐TDC Data Services,202512TDH&TDC&TDS销售方案更新202512_v2_价格脱敏.pptx#slide=14,待产品专家确认
+Manager,历史管理组件,TDH,Transwarp Manager,"TDH Manager;星环大数据管理软件",TDC Platform Service,只识别存量部署；新管理底座以TDC相关服务为准,202512TDH&TDC&TDS销售方案更新202512_v2_价格脱敏.pptx#slide=10-14,待产品专家确认
+Quark,计算组件,TDH,Transwarp Quark,"Quark Batch;Quark-lite;Quark Lite",Inceptor,用于计算加速或轻量专项；是否进入首版需按客户问题启用,Quark-lite 产品介绍（面向客户）.doc#全文,待产品专家确认
