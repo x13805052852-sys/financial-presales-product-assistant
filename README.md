@@ -1,0 +1,50 @@
+# 金融售前产品匹配助手
+
+本仓库用于管理“金融售前产品匹配助手”的内部设计、五天交付计划、资料准备和上线验收。
+
+## 项目目标
+
+销售在企业微信群内输入：
+
+> @金融售前助手 客户希望建设实时湖仓，并保留现有数据平台，应该推荐什么产品？
+
+机器人按统一结构回答：
+
+1. 推荐产品或产品组合
+2. 推荐理由
+3. 适用条件
+4. 可选方案
+5. 资料来源
+
+## 首版范围
+
+- 面向企业内部销售和售前人员。
+- 通过企业微信 API 模式智能机器人接入内部群聊。
+- 根据客户需求、功能和场景推荐公司产品。
+- 首批覆盖 5～8 组高频产品线。
+- 仅使用经过确认的产品资料，不连接 CRM、合同系统或业务数据库。
+- 资料不足或存在冲突时明确提示，不猜测产品结论。
+
+## 文档导航
+
+- [产品设计](docs/superpowers/specs/2026-08-31-financial-presales-product-assistant-design.md)
+- [五天内部执行计划](docs/PROJECT_EXECUTION_PLAN.md)
+- [上线验收标准](docs/ACCEPTANCE_CRITERIA.md)
+- [资料准备说明](docs/DATA_PREPARATION_GUIDE.md)
+- [资料清单模板](docs/templates/source_manifest.csv)
+- [需求与产品映射模板](docs/templates/capability_product_mapping.csv)
+- [验收问题模板](docs/templates/acceptance_questions.csv)
+
+## 首批建议产品线
+
+1. TDH
+2. ArgoDB
+3. TDC
+4. TDS / Astro
+5. LLMOps
+6. TKH
+7. 无涯·问数 / 无涯·问知
+8. Scope
+
+最终范围以第 1 天完成的产品资料盘点和产品专家确认结果为准；若某产品没有有效资料，则不进入首版。
+
