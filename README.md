@@ -31,6 +31,8 @@
 - [五天内部执行计划](docs/PROJECT_EXECUTION_PLAN.md)
 - [上线验收标准](docs/ACCEPTANCE_CRITERIA.md)
 - [资料准备说明](docs/DATA_PREPARATION_GUIDE.md)
+- [任务追踪表](docs/TASK_TRACKER.md)
+- [协作与任务完成规则](CONTRIBUTING.md)
 - [资料清单模板](docs/templates/source_manifest.csv)
 - [需求与产品映射模板](docs/templates/capability_product_mapping.csv)
 - [验收问题模板](docs/templates/acceptance_questions.csv)
@@ -48,3 +50,12 @@
 
 最终范围以第 1 天完成的产品资料盘点和产品专家确认结果为准；若某产品没有有效资料，则不进入首版。
 
+## 自动测试
+
+本地执行：
+
+```bash
+bash scripts/test.sh
+```
+
+每次推送或创建 Pull Request 时，GitHub Actions 会自动执行相同检查。只有本地测试、远端测试和任务验收全部通过，任务才允许标记为完成。
