@@ -32,6 +32,8 @@
 - [上线验收标准](docs/ACCEPTANCE_CRITERIA.md)
 - [资料准备说明](docs/DATA_PREPARATION_GUIDE.md)
 - [任务追踪表](docs/TASK_TRACKER.md)
+- [TDH 资料筛选报告](docs/TDH_SOURCE_ASSESSMENT.md)
+- [TDH 逐文件资料清单](docs/TDH_SOURCE_INVENTORY.csv)
 - [协作与任务完成规则](CONTRIBUTING.md)
 - [资料清单模板](docs/templates/source_manifest.csv)
 - [需求与产品映射模板](docs/templates/capability_product_mapping.csv)

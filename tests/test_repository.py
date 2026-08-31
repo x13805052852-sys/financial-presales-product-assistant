@@ -16,6 +16,8 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/TASK_TRACKER.md",
             "docs/ACCEPTANCE_CRITERIA.md",
             "docs/DATA_PREPARATION_GUIDE.md",
+            "docs/TDH_SOURCE_ASSESSMENT.md",
+            "docs/TDH_SOURCE_INVENTORY.csv",
             "docs/superpowers/specs/2026-08-31-financial-presales-product-assistant-design.md",
             "docs/templates/source_manifest.csv",
             "docs/templates/capability_product_mapping.csv",
@@ -88,6 +90,35 @@ class RepositoryQualityTests(unittest.TestCase):
         task_ids = re.findall(r"^\| (D[1-5]-\d{2}) \|", plan, flags=re.MULTILINE)
         self.assertEqual(53, len(task_ids))
         self.assertEqual(53, len(set(task_ids)))
+
+    def test_tdh_source_inventory_is_complete_and_classified(self):
+        inventory = ROOT / "docs/TDH_SOURCE_INVENTORY.csv"
+        with inventory.open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertEqual(145, len(rows))
+        self.assertEqual(145, len({row["relative_path"] for row in rows}))
+        self.assertEqual(
+            115,
+            sum(row["extension"] != "[no-extension]" for row in rows),
+        )
+
+        expected_counts = {
+            "A-首版核心入库": 6,
+            "B-首版条件入库": 6,
+            "C-独立证据库": 51,
+            "C-测试资料库": 1,
+            "D-二期技术库": 17,
+            "E-排除首版": 64,
+        }
+        actual_counts = {
+            category: sum(row["classification"] == category for row in rows)
+            for category in expected_counts
+        }
+        self.assertEqual(expected_counts, actual_counts)
+        for row in rows:
+            self.assertRegex(row["sha256"], r"^[0-9a-f]{64}$")
+            self.assertEqual("ok", row["extraction_status"])
 
     def test_task_tracker_covers_every_plan_task(self):
         plan = (ROOT / "docs/PROJECT_EXECUTION_PLAN.md").read_text(encoding="utf-8")
