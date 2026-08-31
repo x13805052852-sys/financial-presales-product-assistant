@@ -28,6 +28,7 @@
 ## 文档导航
 
 - [产品设计](docs/superpowers/specs/2026-08-31-financial-presales-product-assistant-design.md)
+- [TDH 100 条模拟销售问题测试集设计](docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md)
 - [五天内部执行计划](docs/PROJECT_EXECUTION_PLAN.md)
 - [上线验收标准](docs/ACCEPTANCE_CRITERIA.md)
 - [资料准备说明](docs/DATA_PREPARATION_GUIDE.md)
