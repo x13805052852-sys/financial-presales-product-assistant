@@ -20,6 +20,8 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/templates/source_manifest.csv",
             "docs/templates/capability_product_mapping.csv",
             "docs/templates/acceptance_questions.csv",
+            ".githooks/pre-push",
+            "scripts/setup_git_hooks.sh",
         ]
         missing = [path for path in required if not (ROOT / path).is_file()]
         self.assertEqual([], missing, f"Missing required files: {missing}")

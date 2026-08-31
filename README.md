@@ -58,4 +58,10 @@
 bash scripts/test.sh
 ```
 
-每次推送或创建 Pull Request 时，GitHub Actions 会自动执行相同检查。只有本地测试、远端测试和任务验收全部通过，任务才允许标记为完成。
+首次克隆仓库后启用提交门禁：
+
+```bash
+bash scripts/setup_git_hooks.sh
+```
+
+此后每次 `git push` 前会自动执行本地测试；推送或创建 Pull Request 后，GitHub Actions 会再次执行相同检查。只有本地测试、远端测试和任务验收全部通过，任务才允许标记为完成。
