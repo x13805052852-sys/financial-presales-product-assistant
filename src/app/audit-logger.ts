@@ -2,6 +2,8 @@ import { createHash, randomUUID } from "node:crypto";
 import { appendFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 
+import type { AnswerFrameworkId } from "../model/answer-framework.js";
+
 export interface AuditEvent {
   requestId: string;
   timestamp: string;
@@ -12,6 +14,7 @@ export interface AuditEvent {
   model: string;
   elapsedMs: number;
   errorCode?: string;
+  answerFramework?: AnswerFrameworkId;
 }
 
 export interface AuditLogger {

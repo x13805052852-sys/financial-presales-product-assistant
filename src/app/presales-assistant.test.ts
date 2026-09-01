@@ -38,6 +38,16 @@ const validAnswer = [
   "推荐组合：ArgoDB AP + TDS-SUITE-R + TDS-SUITE-D",
   "产品分工：ArgoDB AP 负责实时分析，TDS-SUITE-R 负责同步，TDS-SUITE-D 负责治理。",
 ].join("\n");
+const validOverviewAnswer = [
+  "结论：根据当前资料，Astro 主要提供智能交互和任务编排能力。",
+  "主要功能：Pilot 自然语言入口、专业智能体以及 API/MCP 集成。",
+  "口径说明：智能体数量和部分名称需要按目标版本确认。",
+].join("\n");
+const validRiskAnswer = [
+  "冲突点：Astro 两份资料中的智能体数量和部分名称不一致。",
+  "实际影响：影响智能体总数、正式名称和交付版本的销售表述。",
+  "销售口径：可以描述资料明确的具体能力，数量和名称按目标版本确认。",
+].join("\n");
 
 test("answers an in-scope question and records auditable knowledge IDs", async () => {
   const logger = new MemoryLogger();
@@ -63,8 +73,47 @@ test("answers an in-scope question and records auditable knowledge IDs", async (
   assert.ok(result.knowledgeIds.some((id) => ["CP-M003", "CP-M013"].includes(id)));
   assert.ok(result.sources.length > 0);
   assert.equal(result.experimental, true);
+  assert.equal(result.answerFramework, "solution_recommendation");
   assert.equal(logger.events[0]?.status, "answered");
+  assert.equal(logger.events[0]?.answerFramework, "solution_recommendation");
   assert.equal(logger.events[0]?.questionPreview.includes("API_KEY"), false);
+});
+
+test("uses the product overview framework for feature questions", async () => {
+  const model = new StubModel([validOverviewAnswer]);
+  const assistant = new PresalesAssistant({ knowledgeBase, model, modelName: "test-model" });
+
+  const result = await assistant.answerQuestion("告诉我 Astro 目前的更新主要功能有哪些");
+
+  assert.equal(result.status, "answered");
+  assert.equal(result.answerFramework, "product_overview");
+  assert.match(model.requests[0]?.messages[0]?.content ?? "", /产品功能介绍/);
+  assert.doesNotMatch(result.message, /^推荐组合[：:]/mu);
+});
+
+test("uses the risk explanation framework for material conflicts", async () => {
+  const model = new StubModel([validRiskAnswer]);
+  const assistant = new PresalesAssistant({ knowledgeBase, model, modelName: "test-model" });
+
+  const result = await assistant.answerQuestion("Astro 资产标签资料为什么不一致？请说明风险");
+
+  assert.equal(result.status, "answered");
+  assert.equal(result.answerFramework, "risk_explanation");
+  assert.match(model.requests[0]?.messages[0]?.content ?? "", /风险与资料冲突解释/);
+  assert.doesNotMatch(result.message, /^推荐组合[：:]/mu);
+});
+
+test("repairs a product overview without switching frameworks", async () => {
+  const model = new StubModel(["结论：Astro 有相关能力。", validOverviewAnswer]);
+  const assistant = new PresalesAssistant({ knowledgeBase, model, modelName: "test-model" });
+
+  const result = await assistant.answerQuestion("Astro 的主要功能有哪些？");
+
+  assert.equal(result.status, "answered");
+  assert.equal(result.answerFramework, "product_overview");
+  assert.equal(model.requests.length, 2);
+  assert.match(model.requests[1]?.messages.at(-1)?.content ?? "", /必须保留且填写：结论、主要功能/);
+  assert.match(model.requests[1]?.messages.at(-1)?.content ?? "", /不得输出：推荐组合、产品分工/);
 });
 
 test("repairs an invalid answer once", async () => {

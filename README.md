@@ -8,11 +8,11 @@
 
 > @金融售前助手 客户希望建设实时湖仓，并保留现有数据平台，应该推荐什么产品？
 
-机器人按统一结构回答：
+机器人会根据问题类型自动选择回答结构：
 
-1. 结论
-2. 推荐组合
-3. 产品分工
+- 产品功能介绍：结论、主要功能，按需补充口径说明。
+- 产品选型：结论、推荐组合、产品分工。
+- 风险与资料冲突：冲突点、实际影响、销售口径。
 
 信息不足、资料冲突或用户主动要求详细说明时，再按需补充追问、风险说明和资料来源。
 
@@ -31,6 +31,7 @@
 - [TDH 100 条模拟销售问题测试集设计](docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md)
 - [跨产品组合映射与第二批 100 条模拟问题设计](docs/superpowers/specs/2026-09-01-cross-product-combination-question-set-design.md)
 - [企业微信售前助手简洁回答框架](docs/superpowers/specs/2026-09-01-concise-answer-framework-design.md)
+- [企业微信售前助手动态回答框架](docs/superpowers/specs/2026-09-01-dynamic-answer-framework-design.md)
 - [企业微信运行版 V0.1 设计](docs/superpowers/specs/2026-09-01-wecom-mvp-runtime-design.md)
 - [五天内部执行计划](docs/PROJECT_EXECUTION_PLAN.md)
 - [上线验收标准](docs/ACCEPTANCE_CRITERIA.md)

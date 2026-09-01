@@ -3,6 +3,10 @@ import { knownProductNames } from "../knowledge/product-names.js";
 import { retrieveKnowledge } from "../knowledge/retriever.js";
 import type { KnowledgeBase, RetrievalHit } from "../knowledge/types.js";
 import {
+  classifyAnswerFramework,
+  type AnswerFrameworkId,
+} from "../model/answer-framework.js";
+import {
   safeModelFailureMessage,
   safeNoEvidenceMessage,
   safeValidationFailureMessage,
@@ -33,6 +37,7 @@ export interface AnswerResult {
   sources: string[];
   elapsedMs: number;
   experimental: boolean;
+  answerFramework?: AnswerFrameworkId;
 }
 
 interface AssistantOptions {
@@ -78,6 +83,7 @@ export class PresalesAssistant {
       });
     }
 
+    const answerFramework = classifyAnswerFramework(question);
     const retrieval = retrieveKnowledge(question, this.options.knowledgeBase);
     const hits = evidenceForMode(retrieval.hits, this.knowledgeMode);
     if (hits.length === 0) {
@@ -86,24 +92,29 @@ export class PresalesAssistant {
         question,
         startedAt,
         status: "no_evidence",
-        message: safeNoEvidenceMessage(),
+        message: safeNoEvidenceMessage(answerFramework),
         hits,
+        answerFramework,
         errorCode: "no_evidence",
       });
     }
 
     try {
-      let answer = await this.options.model.complete(buildGroundedRequest(question, hits));
+      let answer = await this.options.model.complete(
+        buildGroundedRequest(question, hits, answerFramework),
+      );
       let validation = validateAnswer(answer, hits, {
         knownProductNames: [...knownProductNames],
+        frameworkId: answerFramework,
       });
 
       if (!validation.valid) {
         answer = await this.options.model.complete(
-          buildRepairRequest(question, hits, answer, validation.errors),
+          buildRepairRequest(question, hits, answer, validation.errors, answerFramework),
         );
         validation = validateAnswer(answer, hits, {
           knownProductNames: [...knownProductNames],
+          frameworkId: answerFramework,
         });
       }
 
@@ -113,8 +124,9 @@ export class PresalesAssistant {
           question,
           startedAt,
           status: "validation_error",
-          message: safeValidationFailureMessage(),
+          message: safeValidationFailureMessage(answerFramework),
           hits,
+          answerFramework,
           errorCode: "answer_validation_failed",
         });
       }
@@ -126,6 +138,7 @@ export class PresalesAssistant {
         status: "answered",
         message: answer,
         hits,
+        answerFramework,
       });
     } catch {
       return this.finish({
@@ -135,6 +148,7 @@ export class PresalesAssistant {
         status: "model_error",
         message: safeModelFailureMessage(),
         hits,
+        answerFramework,
         errorCode: "model_request_failed",
       });
     }
@@ -147,6 +161,7 @@ export class PresalesAssistant {
     status: AnswerStatus;
     message: string;
     hits: RetrievalHit[];
+    answerFramework?: AnswerFrameworkId;
     errorCode?: string;
   }): Promise<AnswerResult> {
     const elapsedMs = Math.max(0, this.now() - input.startedAt);
@@ -159,6 +174,7 @@ export class PresalesAssistant {
       knowledgeIds,
       model: this.options.modelName,
       elapsedMs,
+      ...(input.answerFramework ? { answerFramework: input.answerFramework } : {}),
       ...(input.errorCode ? { errorCode: input.errorCode } : {}),
     });
     await this.logger.write(event);
@@ -171,6 +187,7 @@ export class PresalesAssistant {
       sources,
       elapsedMs,
       experimental: this.knowledgeMode === "experimental",
+      ...(input.answerFramework ? { answerFramework: input.answerFramework } : {}),
     };
   }
 }
