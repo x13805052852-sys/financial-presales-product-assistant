@@ -4,9 +4,9 @@
 - 目标版本：V0.1 内部测试版
 - 部署位置：当前 Mac 本地运行
 - 对话入口：企业微信智能机器人（API 模式、WebSocket 长连接）
-- 当前模型：Gemini OpenAI 兼容接口
+- 当前模型：智谱 BigModel `glm-4.7-flash`（OpenAI 兼容接口）
 - 后续模型：公司内网 OpenAI 兼容接口
-- 状态：设计已确认，待用户审核书面规格
+- 状态：总体设计已确认，GLM 切换决定待书面审核
 
 ## 1. 目标
 
@@ -25,7 +25,7 @@
 - 企业微信官方 SDK 已提供长连接、认证、心跳、断线重连和流式回复能力。
 - 当前仓库已有 Node.js 脚本和结构化 CSV，可减少首版开发量。
 - 不依赖公网 IP，适合在当前 Mac 上测试。
-- 模型通过统一适配层调用，从 Gemini 切换到公司模型时不改业务逻辑。
+- 模型通过统一适配层调用，从智谱 GLM 切换到公司模型时不改业务逻辑。
 - 首版不引入向量数据库，避免在五天周期内增加部署和调参风险。
 
 ### 2.2 未采用方案
@@ -117,12 +117,12 @@ OpenAI 兼容模型适配层
 业务代码只依赖 OpenAI 兼容的聊天接口，并通过以下环境变量配置：
 
 ```env
-LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
-LLM_MODEL=gemini-3.6-flash
+LLM_BASE_URL=https://open.bigmodel.cn/api/paas/v4/
+LLM_MODEL=glm-4.7-flash
 LLM_API_KEY=<仅保存在本机>
 ```
 
-已验证当前 Gemini 密钥可以查询模型列表并调用 `gemini-3.6-flash`。`gemini-flash-latest` 在验证时因高负载返回 503，因此首版使用固定模型名，仍保留配置切换和重试能力。
+2026-09-01 企业微信实测中，Gemini 连续调用在约 51 秒后失败，知识检索和企业微信长连接均正常。为降低首版联调期间的外部模型可用性风险，已决定切换智谱 BigModel 官方 OpenAI 兼容接口，首选免费模型 `glm-4.7-flash`。切换后重新执行模型冒烟测试和企业微信端到端测试；若 50 条核心问题的产品推荐正确率低于 90%，再评估更强的付费 GLM 模型。
 
 切换公司内网模型时只替换 `LLM_BASE_URL`、`LLM_MODEL` 和 `LLM_API_KEY`。检索、提示词、答案校验、企业微信接入和测试接口不变。
 
@@ -172,12 +172,12 @@ LLM_API_KEY=<仅保存在本机>
 
 ## 7. 外部资料与数据安全
 
-- Gemini 只接收当前问题和检索后的最小必要产品片段，不上传整份原始 PPT、PDF 或 Excel。
-- 不向 Gemini 发送客户真实名称、联系方式、价格、合同、投标内容或生产数据。
+- 外部 GLM 只接收当前问题和检索后的最小必要产品片段，不上传整份原始 PPT、PDF 或 Excel。
+- 不向外部 GLM 发送客户真实名称、联系方式、价格、合同、投标内容或生产数据。
 - API Key、Bot ID 和 Bot Secret 只通过本机环境变量或未跟踪的本地配置注入。
 - `.env`、`.env.local`、日志和运行缓存必须进入 `.gitignore`。
 - GitHub 只保存程序、脱敏结构化知识、测试数据和设计文档。
-- 已在聊天中出现的 Gemini 密钥在联调结束后更换，上线前必须使用新密钥。
+- 已在聊天中出现过的任何模型密钥在联调结束后更换，上线前必须使用新密钥。
 
 ## 8. 异常处理
 
@@ -185,8 +185,8 @@ LLM_API_KEY=<仅保存在本机>
 | --- | --- |
 | 企业微信断线 | SDK 自动重连；连续失败写入错误日志 |
 | 重复消息 | 按请求 ID 去重，不重复调用模型或回复 |
-| Gemini 超时或 503 | 指数退避重试，达到上限后返回友好提示 |
-| Gemini 返回格式错误 | 尝试一次格式修复，仍不合格则返回安全提示 |
+| GLM 超时、限流或 5xx | 指数退避重试，达到上限后返回友好提示 |
+| GLM 返回格式错误 | 尝试一次格式修复，仍不合格则返回安全提示 |
 | 未检索到资料 | 不推荐产品，说明当前资料无法确定 |
 | 信息不足 | 最多提出两个会改变产品选择的关键问题 |
 | 资料冲突 | 不输出确定结论，展示简短风险说明并转产品专家 |
@@ -204,9 +204,9 @@ LLM_API_KEY=<仅保存在本机>
 - 模型超时、503、无效 JSON 和重试上限测试。
 - 企业微信重复消息、断线和发送失败测试。
 - 200 条模拟问题全部执行映射回归测试。
-- 选取 50 条核心问题执行 Gemini 完整回答测试。
+- 选取 50 条核心问题执行 GLM 完整回答测试。
 
-GitHub Actions 只运行不需要真实密钥的单元测试、模拟模型测试和确定性检索测试。Gemini 与企业微信真实联调只在本机运行。
+GitHub Actions 只运行不需要真实密钥的单元测试、模拟模型测试和确定性检索测试。GLM 与企业微信真实联调只在本机运行。
 
 ### 9.2 企业微信验收
 
@@ -247,6 +247,8 @@ GitHub Actions 只运行不需要真实密钥的单元测试、模拟模型测�
 
 ## 12. 参考
 
+- [智谱 BigModel OpenAI API 兼容说明](https://docs.bigmodel.cn/cn/guide/develop/openai/introduction)
+- [智谱 BigModel 模型概览](https://docs.bigmodel.cn/cn/guide/start/model-overview)
 - [Gemini API 的 OpenAI 兼容接口](https://ai.google.dev/gemini-api/docs/openai)
 - [企业微信智能机器人官方 Node.js SDK](https://github.com/WecomTeam/aibot-node-sdk)
 - [企业微信售前助手简洁回答框架](2026-09-01-concise-answer-framework-design.md)
