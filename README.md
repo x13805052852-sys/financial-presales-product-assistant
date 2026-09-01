@@ -31,6 +31,7 @@
 - [TDH 100 条模拟销售问题测试集设计](docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md)
 - [跨产品组合映射与第二批 100 条模拟问题设计](docs/superpowers/specs/2026-09-01-cross-product-combination-question-set-design.md)
 - [企业微信售前助手简洁回答框架](docs/superpowers/specs/2026-09-01-concise-answer-framework-design.md)
+- [企业微信运行版 V0.1 设计](docs/superpowers/specs/2026-09-01-wecom-mvp-runtime-design.md)
 - [五天内部执行计划](docs/PROJECT_EXECUTION_PLAN.md)
 - [上线验收标准](docs/ACCEPTANCE_CRITERIA.md)
 - [资料准备说明](docs/DATA_PREPARATION_GUIDE.md)
