@@ -8,3 +8,6 @@ __pycache__/
 work/
 outputs/
 node_modules
+dist/
+.cache/
+logs/
