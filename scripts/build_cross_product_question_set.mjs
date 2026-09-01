@@ -136,14 +136,14 @@ const questions = [
   q("数据接入、开发与治理组合", "困难", "客户同时要批量、实时、治理、API 服务和智能编排，但要求只买一个产品，应该怎么解释？", ["CP-M004", "CP-M010", "CP-M021", "CP-M022"], "纠正错误前提"),
 
   // 2. 实时湖仓/数据库与治理组合：20（简单 7 / 中等 10 / 困难 3）
-  q("实时湖仓/数据库与治理组合", "简单", "我想要数据实时流入数据库，同时还要数据治理，应该选哪个产品搭配？", ["CP-M003", "CP-M013"], "先追问再推荐", { missing: "实时 SLA、是否包含事务、数据源和治理范围", ask: "可接受延迟是分钟、秒还是亚秒？主要是分析还是还要承载事务？", optional: "ArgoDB AP + TDS-SUITE-E；分钟级可接受时比较 TDH 湖仓集一体版 + TDS-SUITE-E", answer: "若以秒级或亚秒级实时写入后分析为主，条件化推荐 ArgoDB AP + TDS-SUITE-R + TDS-SUITE-D：ArgoDB AP 负责实时存储与分析，TDS-SUITE-R 负责实时同步和服务，TDS-SUITE-D 负责目录、质量和分类治理；若主要是分钟级入湖与湖仓集统一，再比较 TDH 湖仓集一体版 + TDS。" }),
+  q("实时湖仓/数据库与治理组合", "简单", "我想要数据实时流入数据库，同时还要数据治理，应该选哪个产品搭配？", ["CP-M003", "CP-M013"], "先追问再推荐", { missing: "实时 SLA、是否包含事务、数据源和治理范围", ask: "可接受延迟是分钟、秒还是亚秒？主要是分析还是还要承载事务？", optional: "ArgoDB AP + TDS-SUITE-E；分钟级可接受时比较 TDH 湖仓集一体版 + TDS-SUITE-E", answer: "需要先确认实时等级和是否承载事务，再确定数据底座。" }),
   q("实时湖仓/数据库与治理组合", "简单", "交易数据要秒级进入分析库，并做目录和质量治理，怎么组合？", ["CP-M013"]),
   q("实时湖仓/数据库与治理组合", "简单", "业务数据五分钟内进入数据湖，入湖后做分类分级，推荐什么？", ["CP-M011"]),
   q("实时湖仓/数据库与治理组合", "简单", "CRM 既要事务更新又要实时分析，还要数据治理，应该推什么？", ["CP-M014"]),
   q("实时湖仓/数据库与治理组合", "简单", "核心库不迁，只把数据实时同步出来分析和治理，怎么配？", ["CP-M015"]),
   q("实时湖仓/数据库与治理组合", "简单", "事件流需要先做实时 ETL，再入实时数仓并治理，产品组合是什么？", ["CP-M016"]),
   q("实时湖仓/数据库与治理组合", "简单", "只缺实时同步和数据 API 服务，现有 TDH 不换，应该补哪个套件？", ["CP-M018"]),
-  q("实时湖仓/数据库与治理组合", "中等", "风控流水要实时入库、实时聚合，并且质量问题要自动告警，怎么组合？", ["CP-M013", "CP-M019"]),
+  q("实时湖仓/数据库与治理组合", "中等", "Astro 是否能够进行实时的数据治理？", ["CP-M019", "CP-M020", "CP-M021"], "推荐并给可选方案", { main: "ArgoDB AP + TDS-SUITE-R + TDS-SUITE-D + Astro", optional: "TDH 湖仓集一体版 + TDS-SUITE-D + Astro", answer: "Astro 可以参与实时数据治理，但主要负责智能分析和任务编排，不能替代治理执行工具和数据底座。", roles: "ArgoDB AP/TDH：存储和处理数据；TDS-SUITE-R：实时同步与数据服务；TDS-SUITE-D：治理执行；Astro：智能识别、生成建议和编排治理任务" }),
   q("实时湖仓/数据库与治理组合", "中等", "Kafka 事件既要长期保存、流式计算，又要进入数据库统一分析和治理，需要几层产品？", ["CP-M017"]),
   q("实时湖仓/数据库与治理组合", "中等", "客户目前是 Flink、Kafka、Redis 多套架构，希望统一实时数据服务并增加治理，怎么推荐？", ["CP-M016", "CP-M017", "CP-M003"], "推荐并给可选方案"),
   q("实时湖仓/数据库与治理组合", "中等", "同一批数据既要实时大屏，又要历史全量分析和敏感数据分类，选 TDH 还是 ArgoDB？", ["CP-M013", "CP-M020", "CP-M025"], "推荐并给可选方案", { ask: "大屏可接受延迟是多少？是否还要求湖仓集一表多用？", missing: "时效和统一架构优先级" }),
@@ -270,7 +270,28 @@ const normalizedQuestions = questions.map((spec, index) => {
   const optional = spec.optional ?? base.可选组合;
   const ask = spec.ask ?? (needsInfo ? base.必须追问 : "无");
   const missing = spec.missing ?? (needsInfo ? base.必须追问 : "无");
-  const answer = spec.answer ?? `建议：${main}。产品分工：${base.产品分工}。同时核对适用条件与排除条件，不能把多个产品的能力混为一项。`;
+  const answerRoles = spec.roles ?? base.产品分工;
+  const defaultConclusions = {
+    "直接推荐": "该需求可以通过以下产品组合实现。",
+    "推荐并给可选方案": "该需求可以实现，建议根据实际场景选择主推或可选组合。",
+    "先追问再推荐": "当前信息不足，需要先确认关键条件。",
+    "纠正错误前提": "当前前提不准确，需要按照产品实际职责重新判断。",
+    "拒绝确定性承诺": "当前请求不能作确定性承诺。",
+  };
+  const conclusion = spec.answer ?? defaultConclusions[spec.action];
+  const recommendation = needsInfo
+    ? `待补充信息；候选方向：${optional}`
+    : spec.action === "推荐并给可选方案"
+      ? `${main}；可选：${optional}`
+      : main;
+  const answerParts = [
+    `结论：${conclusion}`,
+    `推荐组合：${recommendation}`,
+    `产品分工：${answerRoles}`,
+  ];
+  if (needsInfo) answerParts.push(`需要确认：${ask}`);
+  if (conflict === "有") answerParts.push("风险说明：资料存在版本口径冲突，需按目标版本由产品专家确认。");
+  const answer = answerParts.join("\n");
   return {
     编号: `CP-Q${String(index + 1).padStart(3, "0")}`,
     数据性质: "模拟问题",
@@ -434,7 +455,7 @@ guideSheet.mergeCells("A1:F2");
 guideSheet.getRange("A1:F2").values = [["跨产品组合题库｜使用说明"]];
 guideSheet.getRange("A1:F2").format = { fill: "#17365D", font: { bold: true, color: "#FFFFFF", size: 18 }, horizontalAlignment: "center", verticalAlignment: "center" };
 guideSheet.mergeCells("A4:F4");
-guideSheet.getRange("A4:F4").values = [["重要：全部为模拟问题和待确认映射；正式销售回答必须展示产品分工、限制条件和资料来源。"]];
+guideSheet.getRange("A4:F4").values = [["重要：默认回答只展示结论、推荐组合和产品分工；追问、风险和来源仅在必要时追加。"]];
 guideSheet.getRange("A4:F4").format = { fill: "#FFF2CC", font: { bold: true, color: "#7F6000" } };
 guideSheet.getRange("A6:B6").values = [["执行顺序", "说明"]];
 guideSheet.getRange("A7:B13").values = [
@@ -447,8 +468,8 @@ guideSheet.getRange("A7:B13").values = [
   ["7. 收集真题", "模拟题通过后，再单独收集真实销售原话并标记为真实问题。"],
 ];
 guideSheet.mergeCells("D6:F6");
-guideSheet.getRange("D6:F6").values = [["统一回答结构"]];
-guideSheet.getRange("D7:F13").values = [["1. 推荐结论", "", ""], ["2. 需求拆分", "", ""], ["3. 产品分工", "", ""], ["4. 适用与排除条件", "", ""], ["5. 必须追问", "", ""], ["6. 可选方案", "", ""], ["7. 资料来源", "", ""]];
+guideSheet.getRange("D6:F6").values = [["默认回答与按需补充"]];
+guideSheet.getRange("D7:F13").values = [["1. 结论", "", ""], ["2. 推荐组合", "", ""], ["3. 产品分工", "", ""], ["4. 需要确认（按需）", "", ""], ["5. 风险说明（按需）", "", ""], ["6. 资料来源（按需）", "", ""], ["空字段不显示", "", ""]];
 guideSheet.getRange("D7:F13").merge(true);
 guideSheet.mergeCells("A15:F15");
 guideSheet.getRange("A15:F15").values = [["上线前验收"]];

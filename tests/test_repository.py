@@ -28,6 +28,7 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/superpowers/specs/2026-08-31-financial-presales-product-assistant-design.md",
             "docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md",
             "docs/superpowers/specs/2026-09-01-cross-product-combination-question-set-design.md",
+            "docs/superpowers/specs/2026-09-01-concise-answer-framework-design.md",
             "docs/templates/source_manifest.csv",
             "docs/templates/capability_product_mapping.csv",
             "docs/templates/acceptance_questions.csv",
@@ -390,10 +391,36 @@ class RepositoryQualityTests(unittest.TestCase):
                 self.assertEqual("待补充信息", row["预期主推组合"])
                 self.assertNotEqual("无", row["缺失信息"])
                 self.assertNotEqual("无", row["必须追问"])
+                self.assertIn("\n需要确认：", row["预期答案要点"])
+            else:
+                self.assertNotIn("\n需要确认：", row["预期答案要点"])
             if row["版本冲突"] == "有":
                 self.assertNotEqual("高", row["推荐置信度"])
+                self.assertIn("\n风险说明：", row["预期答案要点"])
+
+            answer = row["预期答案要点"]
+            self.assertTrue(answer.startswith("结论："))
+            self.assertEqual(1, answer.count("结论："))
+            self.assertEqual(1, answer.count("\n推荐组合："))
+            self.assertEqual(1, answer.count("\n产品分工："))
+            self.assertNotIn("\n资料来源：", answer)
+            self.assertNotIn("\n适用条件：", answer)
 
         self.assertEqual(known_mappings, covered_mappings)
+
+        astro_realtime = next(
+            row for row in rows
+            if row["模拟销售提问"] == "Astro 是否能够进行实时的数据治理？"
+        )
+        self.assertIn("Astro 可以参与实时数据治理", astro_realtime["预期答案要点"])
+        self.assertIn(
+            "ArgoDB AP + TDS-SUITE-R + TDS-SUITE-D + Astro",
+            astro_realtime["预期答案要点"],
+        )
+        self.assertIn(
+            "TDH 湖仓集一体版 + TDS-SUITE-D + Astro",
+            astro_realtime["预期答案要点"],
+        )
 
     def test_task_tracker_covers_every_plan_task(self):
         plan = (ROOT / "docs/PROJECT_EXECUTION_PLAN.md").read_text(encoding="utf-8")

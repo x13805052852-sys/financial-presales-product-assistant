@@ -10,11 +10,11 @@
 
 机器人按统一结构回答：
 
-1. 推荐产品或产品组合
-2. 推荐理由
-3. 适用条件
-4. 可选方案
-5. 资料来源
+1. 结论
+2. 推荐组合
+3. 产品分工
+
+信息不足、资料冲突或用户主动要求详细说明时，再按需补充追问、风险说明和资料来源。
 
 ## 首版范围
 
@@ -30,6 +30,7 @@
 - [产品设计](docs/superpowers/specs/2026-08-31-financial-presales-product-assistant-design.md)
 - [TDH 100 条模拟销售问题测试集设计](docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md)
 - [跨产品组合映射与第二批 100 条模拟问题设计](docs/superpowers/specs/2026-09-01-cross-product-combination-question-set-design.md)
+- [企业微信售前助手简洁回答框架](docs/superpowers/specs/2026-09-01-concise-answer-framework-design.md)
 - [五天内部执行计划](docs/PROJECT_EXECUTION_PLAN.md)
 - [上线验收标准](docs/ACCEPTANCE_CRITERIA.md)
 - [资料准备说明](docs/DATA_PREPARATION_GUIDE.md)
