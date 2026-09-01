@@ -35,11 +35,14 @@
 - [资料准备说明](docs/DATA_PREPARATION_GUIDE.md)
 - [任务追踪表](docs/TASK_TRACKER.md)
 - [TDH 资料筛选报告](docs/TDH_SOURCE_ASSESSMENT.md)
+- [跨产品组合资料筛选报告](docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md)
 - [TDH 逐文件资料清单](docs/TDH_SOURCE_INVENTORY.csv)
 - [领域词汇表](CONTEXT.md)
 - [TDH 产品标准名与别名](docs/knowledge/TDH_PRODUCT_ALIASES.csv)
 - [TDH 能力—产品映射初稿](docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv)
 - [TDH 100 条模拟销售问题](docs/knowledge/TDH_SYNTHETIC_TEST_QUESTIONS_100.csv)
+- [跨产品组合映射](docs/knowledge/CROSS_PRODUCT_COMBINATION_MAPPING.csv)
+- [第二批 100 条跨产品模拟销售问题](docs/knowledge/CROSS_PRODUCT_SYNTHETIC_TEST_QUESTIONS_100.csv)
 - [协作与任务完成规则](CONTRIBUTING.md)
 - [资料清单模板](docs/templates/source_manifest.csv)
 - [需求与产品映射模板](docs/templates/capability_product_mapping.csv)
@@ -59,6 +62,8 @@
 最终范围以第 1 天完成的产品资料盘点和产品专家确认结果为准；若某产品没有有效资料，则不进入首版。
 
 当前 TDH 映射仍处于“待产品专家确认”状态，只能用于内部实验和测试，不能直接作为对客承诺。
+
+跨产品组合映射覆盖 TDH、ArgoDB、TDC、TDS 和 Astro，同样处于“待产品专家确认”状态。Astro 资料中的智能体数量和个别名称存在版本口径差异，机器人必须按目标版本提示确认，不能硬性回答。
 
 ## 自动测试
 
