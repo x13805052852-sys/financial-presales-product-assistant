@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { loadLlmConfig, loadRuntimeConfig, loadWecomConfig } from "./config.js";
+import {
+  loadKnowledgeMode,
+  loadLlmConfig,
+  loadRuntimeConfig,
+  loadWecomConfig,
+} from "./config.js";
 
 const validEnvironment = {
   LLM_BASE_URL: "https://generativelanguage.googleapis.com/v1beta/openai/",
@@ -18,7 +23,13 @@ test("loads runtime configuration with safe defaults", () => {
   assert.equal(config.llm.timeoutMs, 30_000);
   assert.equal(config.llm.maxRetries, 2);
   assert.equal(config.logDir, "logs");
+  assert.equal(config.knowledgeMode, "experimental");
   assert.equal(config.wecom.botId, "test-bot-id");
+});
+
+test("only accepts explicit knowledge modes", () => {
+  assert.equal(loadKnowledgeMode({ KNOWLEDGE_MODE: "production" }), "production");
+  assert.throws(() => loadKnowledgeMode({ KNOWLEDGE_MODE: "unsafe" }), /KNOWLEDGE_MODE/);
 });
 
 test("supports independent model and WeCom configuration", () => {

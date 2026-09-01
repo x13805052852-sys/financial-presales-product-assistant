@@ -58,3 +58,28 @@ export function buildGroundedRequest(
     ],
   };
 }
+
+export function buildRepairRequest(
+  question: string,
+  hits: RetrievalHit[],
+  invalidAnswer: string,
+  validationErrors: string[],
+): ChatCompletionRequest {
+  const request = buildGroundedRequest(question, hits);
+  return {
+    ...request,
+    messages: [
+      ...request.messages,
+      { role: "assistant", content: invalidAnswer },
+      {
+        role: "user",
+        content: [
+          "上一版回答未通过程序校验，请只根据原知识证据重写一次。",
+          `校验问题：${validationErrors.join("；")}`,
+          "必须保留且填写：结论、推荐组合、产品分工。",
+          "不得新增原知识证据中没有的产品。",
+        ].join("\n"),
+      },
+    ],
+  };
+}

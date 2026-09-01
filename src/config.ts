@@ -14,8 +14,11 @@ export interface WecomConfig {
 export interface RuntimeConfig {
   llm: LlmConfig;
   wecom: WecomConfig;
+  knowledgeMode: KnowledgeMode;
   logDir: string;
 }
+
+export type KnowledgeMode = "experimental" | "production";
 
 type Environment = NodeJS.ProcessEnv | Record<string, string | undefined>;
 
@@ -77,10 +80,19 @@ export function loadWecomConfig(env: Environment = process.env): WecomConfig {
   };
 }
 
+export function loadKnowledgeMode(env: Environment = process.env): KnowledgeMode {
+  const value = env.KNOWLEDGE_MODE?.trim() || "experimental";
+  if (value !== "experimental" && value !== "production") {
+    throw new Error("KNOWLEDGE_MODE must be experimental or production");
+  }
+  return value;
+}
+
 export function loadRuntimeConfig(env: Environment = process.env): RuntimeConfig {
   return {
     llm: loadLlmConfig(env),
     wecom: loadWecomConfig(env),
+    knowledgeMode: loadKnowledgeMode(env),
     logDir: env.LOG_DIR?.trim() || "logs",
   };
 }

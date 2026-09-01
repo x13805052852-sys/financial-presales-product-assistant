@@ -72,3 +72,7 @@ export function safeModelFailureMessage(): string {
 export function safeNoEvidenceMessage(): string {
   return "当前知识库暂无足够依据，暂时无法确定产品组合，请补充客户场景或联系产品专家确认。";
 }
+
+export function safeValidationFailureMessage(): string {
+  return "回答未通过产品依据校验，暂时无法给出推荐，请联系产品专家确认。";
+}

@@ -7,6 +7,7 @@
     "node": ">=20"
   },
   "scripts": {
+    "ask": "tsx src/cli/ask.ts",
     "build": "tsc -p tsconfig.json",
     "smoke:model": "tsx src/cli/smoke-model.ts",
     "test": "tsx --test src/**/*.test.ts",
