@@ -29,6 +29,7 @@
 
 ## 文档导航
 
+- [当前项目进度（2026-09-02）](docs/PROGRESS_STATUS_2026-09-02.md)
 - [产品设计](docs/superpowers/specs/2026-08-31-financial-presales-product-assistant-design.md)
 - [TDH 100 条模拟销售问题测试集设计](docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md)
 - [跨产品组合映射与第二批 100 条模拟问题设计](docs/superpowers/specs/2026-09-01-cross-product-combination-question-set-design.md)
