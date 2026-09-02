@@ -10,6 +10,7 @@
     "ask": "tsx src/cli/ask.ts",
     "build": "tsc -p tsconfig.json",
     "smoke:model": "tsx src/cli/smoke-model.ts",
+    "start:wecom": "tsx src/cli/wecom-bot.ts",
     "test": "tsx --test src/**/*.test.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
@@ -19,6 +20,7 @@
     "typescript": "^5.9.0"
   },
   "dependencies": {
+    "@wecom/aibot-node-sdk": "^1.0.7",
     "csv-parse": "^6.2.1"
   }
 }
