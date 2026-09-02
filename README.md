@@ -16,6 +16,8 @@
 
 信息不足、资料冲突或用户主动要求详细说明时，再按需补充追问、风险说明和资料来源。
 
+机器人会在同一群聊中按提问人隔离上下文，并自动识别紧邻上一轮的自然追问。系统只保留一轮、30分钟有效的内存上下文；判断不清时按新问题处理。识别为追问时，回答开头会显示简短的“承接上一问”提示。
+
 ## 首版范围
 
 - 面向企业内部销售和售前人员。
@@ -33,6 +35,8 @@
 - [企业微信售前助手简洁回答框架](docs/superpowers/specs/2026-09-01-concise-answer-framework-design.md)
 - [企业微信售前助手动态回答框架](docs/superpowers/specs/2026-09-01-dynamic-answer-framework-design.md)
 - [企业微信运行版 V0.1 设计](docs/superpowers/specs/2026-09-01-wecom-mvp-runtime-design.md)
+- [企业微信单轮上下文识别设计](docs/superpowers/specs/2026-09-02-one-turn-context-resolution-design.md)
+- [企业微信单轮上下文实施计划](docs/superpowers/plans/2026-09-02-one-turn-context-resolution-implementation-plan.md)
 - [五天内部执行计划](docs/PROJECT_EXECUTION_PLAN.md)
 - [上线验收标准](docs/ACCEPTANCE_CRITERIA.md)
 - [资料准备说明](docs/DATA_PREPARATION_GUIDE.md)
@@ -46,6 +50,7 @@
 - [TDH 100 条模拟销售问题](docs/knowledge/TDH_SYNTHETIC_TEST_QUESTIONS_100.csv)
 - [跨产品组合映射](docs/knowledge/CROSS_PRODUCT_COMBINATION_MAPPING.csv)
 - [第二批 100 条跨产品模拟销售问题](docs/knowledge/CROSS_PRODUCT_SYNTHETIC_TEST_QUESTIONS_100.csv)
+- [100 组双轮上下文测试](docs/knowledge/CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv)
 - [协作与任务完成规则](CONTRIBUTING.md)
 - [资料清单模板](docs/templates/source_manifest.csv)
 - [需求与产品映射模板](docs/templates/capability_product_mapping.csv)
