@@ -1,0 +1,101 @@
+编号,类别,群聊ID,上一轮用户ID,当前用户ID,上一问,上一轮主题,上一轮产品,当前问,是否引用,期望是否继承,期望补全关键词,期望核心产品,风险标签,审核状态
+CTX-Q001,正常追问,g01,u01,u01,客户要实时写入分析数据库并做数据治理应该怎么搭配,实时数据库治理,ArgoDB AP；TDS-SUITE-D,所以正常能到多少？,否,是,ArgoDB AP,ArgoDB AP,时效边界,待产品专家确认
+CTX-Q002,正常追问,g01,u01,u01,客户要实时写入分析数据库并做数据治理应该怎么搭配,实时数据库治理,ArgoDB AP；TDS-SUITE-D,那实际延迟呢？,否,是,ArgoDB AP,ArgoDB AP,时效边界,待产品专家确认
+CTX-Q003,正常追问,g01,u01,u01,客户要实时写入分析数据库并做数据治理应该怎么搭配,实时数据库治理,ArgoDB AP；TDS-SUITE-D,这个组合银行能用吗？,否,是,ArgoDB AP,ArgoDB AP,场景追问,待产品专家确认
+CTX-Q004,正常追问,g01,u01,u01,客户要实时写入分析数据库并做数据治理应该怎么搭配,实时数据库治理,ArgoDB AP；TDS-SUITE-D,为什么不能承诺毫秒级？,否,是,ArgoDB AP,ArgoDB AP,承诺风险,待产品专家确认
+CTX-Q005,正常追问,g01,u01,u01,客户要实时写入分析数据库并做数据治理应该怎么搭配,实时数据库治理,ArgoDB AP；TDS-SUITE-D,具体需要确认什么？,否,是,ArgoDB AP,ArgoDB AP,条件追问,待产品专家确认
+CTX-Q006,正常追问,g02,u02,u02,客户要求亚秒级分析并同时完成数据治理,亚秒级分析治理,ArgoDB AP；TDS-SUITE-D,那秒级能保证吗？,否,是,ArgoDB AP,ArgoDB AP,承诺风险,待产品专家确认
+CTX-Q007,正常追问,g02,u02,u02,客户要求亚秒级分析并同时完成数据治理,亚秒级分析治理,ArgoDB AP；TDS-SUITE-D,所以要不要做压测？,否,是,ArgoDB AP,ArgoDB AP,条件追问,待产品专家确认
+CTX-Q008,正常追问,g02,u02,u02,客户要求亚秒级分析并同时完成数据治理,亚秒级分析治理,ArgoDB AP；TDS-SUITE-D,这种情况下谁负责同步？,否,是,ArgoDB AP,ArgoDB AP,分工追问,待产品专家确认
+CTX-Q009,正常追问,g02,u02,u02,客户要求亚秒级分析并同时完成数据治理,亚秒级分析治理,ArgoDB AP；TDS-SUITE-D,那治理部分怎么落地？,否,是,ArgoDB AP,ArgoDB AP,分工追问,待产品专家确认
+CTX-Q010,正常追问,g02,u02,u02,客户要求亚秒级分析并同时完成数据治理,亚秒级分析治理,ArgoDB AP；TDS-SUITE-D,正常推荐口径是什么？,否,是,ArgoDB AP,ArgoDB AP,销售口径,待产品专家确认
+CTX-Q011,正常追问,g03,u03,u03,客户需要实时数据入湖并统一做增量分析,实时湖仓入湖,TDH 湖仓集一体版；Slipstream,那入湖能多快？,否,是,TDH 湖仓集一体版,TDH 湖仓集一体版,时效边界,待产品专家确认
+CTX-Q012,正常追问,g03,u03,u03,客户需要实时数据入湖并统一做增量分析,实时湖仓入湖,TDH 湖仓集一体版；Slipstream,所以用哪个版本？,否,是,TDH 湖仓集一体版,TDH 湖仓集一体版,版本追问,待产品专家确认
+CTX-Q013,正常追问,g03,u03,u03,客户需要实时数据入湖并统一做增量分析,实时湖仓入湖,TDH 湖仓集一体版；Slipstream,这个能保留现有平台吗？,否,是,TDH 湖仓集一体版,TDH 湖仓集一体版,兼容追问,待产品专家确认
+CTX-Q014,正常追问,g03,u03,u03,客户需要实时数据入湖并统一做增量分析,实时湖仓入湖,TDH 湖仓集一体版；Slipstream,为什么还需要流处理？,否,是,TDH 湖仓集一体版,TDH 湖仓集一体版,分工追问,待产品专家确认
+CTX-Q015,正常追问,g03,u03,u03,客户需要实时数据入湖并统一做增量分析,实时湖仓入湖,TDH 湖仓集一体版；Slipstream,具体怎么分工？,否,是,TDH 湖仓集一体版,TDH 湖仓集一体版,分工追问,待产品专家确认
+CTX-Q016,正常追问,g04,u04,u04,客户已有数据湖还要实时流式写入,数据湖实时写入,TDH 数据湖版；Slipstream,那分钟级可以吗？,否,是,TDH 数据湖版,TDH 数据湖版,时效边界,待产品专家确认
+CTX-Q017,正常追问,g04,u04,u04,客户已有数据湖还要实时流式写入,数据湖实时写入,TDH 数据湖版；Slipstream,所以需要改原架构吗？,否,是,TDH 数据湖版,TDH 数据湖版,架构追问,待产品专家确认
+CTX-Q018,正常追问,g04,u04,u04,客户已有数据湖还要实时流式写入,数据湖实时写入,TDH 数据湖版；Slipstream,这个支持增量分析吗？,否,是,TDH 数据湖版,TDH 数据湖版,能力追问,待产品专家确认
+CTX-Q019,正常追问,g04,u04,u04,客户已有数据湖还要实时流式写入,数据湖实时写入,TDH 数据湖版；Slipstream,为什么不直接用单一产品？,否,是,TDH 数据湖版,TDH 数据湖版,组合边界,待产品专家确认
+CTX-Q020,正常追问,g04,u04,u04,客户已有数据湖还要实时流式写入,数据湖实时写入,TDH 数据湖版；Slipstream,正常交付需要确认哪些条件？,否,是,TDH 数据湖版,TDH 数据湖版,条件追问,待产品专家确认
+CTX-Q021,正常追问,g05,u05,u05,客户希望Astro帮助完成智能数据治理,Astro智能治理边界,Astro；TDS-SUITE-D,那它能直接执行治理吗？,否,是,Astro,Astro,能力边界,待产品专家确认
+CTX-Q022,正常追问,g05,u05,u05,客户希望Astro帮助完成智能数据治理,Astro智能治理边界,Astro；TDS-SUITE-D,所以TDS还需要吗？,否,是,Astro,Astro,产品分工,待产品专家确认
+CTX-Q023,正常追问,g05,u05,u05,客户希望Astro帮助完成智能数据治理,Astro智能治理边界,Astro；TDS-SUITE-D,这个能自动生成标签吗？,否,是,Astro,Astro,能力追问,待产品专家确认
+CTX-Q024,正常追问,g05,u05,u05,客户希望Astro帮助完成智能数据治理,Astro智能治理边界,Astro；TDS-SUITE-D,为什么还要专业治理工具？,否,是,Astro,Astro,能力边界,待产品专家确认
+CTX-Q025,正常追问,g05,u05,u05,客户希望Astro帮助完成智能数据治理,Astro智能治理边界,Astro；TDS-SUITE-D,具体销售应该怎么说？,否,是,Astro,Astro,销售口径,待产品专家确认
+CTX-Q026,正常追问,g06,u06,u06,客户询问Astro资产标签资料存在的版本差异,Astro标签资料冲突,Astro；TDS-SUITE-D,那冲突影响什么？,否,是,Astro,Astro,资料冲突,待产品专家确认
+CTX-Q027,正常追问,g06,u06,u06,客户询问Astro资产标签资料存在的版本差异,Astro标签资料冲突,Astro；TDS-SUITE-D,所以现在能不能承诺？,否,是,Astro,Astro,承诺风险,待产品专家确认
+CTX-Q028,正常追问,g06,u06,u06,客户询问Astro资产标签资料存在的版本差异,Astro标签资料冲突,Astro；TDS-SUITE-D,这个要确认哪个版本？,否,是,Astro,Astro,版本追问,待产品专家确认
+CTX-Q029,正常追问,g06,u06,u06,客户询问Astro资产标签资料存在的版本差异,Astro标签资料冲突,Astro；TDS-SUITE-D,为什么两份资料不一样？,否,是,Astro,Astro,资料冲突,待产品专家确认
+CTX-Q030,正常追问,g06,u06,u06,客户询问Astro资产标签资料存在的版本差异,Astro标签资料冲突,Astro；TDS-SUITE-D,正常对客户怎么解释？,否,是,Astro,Astro,销售口径,待产品专家确认
+CTX-Q031,正常追问,g07,u07,u07,客户要把Oracle业务迁移到国产数据库,Oracle国产替代,ArgoDB HTAP,那事务能力呢？,否,是,ArgoDB HTAP,ArgoDB HTAP,能力追问,待产品专家确认
+CTX-Q032,正常追问,g07,u07,u07,客户要把Oracle业务迁移到国产数据库,Oracle国产替代,ArgoDB HTAP,所以能直接替换吗？,否,是,ArgoDB HTAP,ArgoDB HTAP,迁移边界,待产品专家确认
+CTX-Q033,正常追问,g07,u07,u07,客户要把Oracle业务迁移到国产数据库,Oracle国产替代,ArgoDB HTAP,这个需要评估哪些SQL？,否,是,ArgoDB HTAP,ArgoDB HTAP,条件追问,待产品专家确认
+CTX-Q034,正常追问,g07,u07,u07,客户要把Oracle业务迁移到国产数据库,Oracle国产替代,ArgoDB HTAP,为什么还要做兼容验证？,否,是,ArgoDB HTAP,ArgoDB HTAP,迁移边界,待产品专家确认
+CTX-Q035,正常追问,g07,u07,u07,客户要把Oracle业务迁移到国产数据库,Oracle国产替代,ArgoDB HTAP,具体先确认什么？,否,是,ArgoDB HTAP,ArgoDB HTAP,条件追问,待产品专家确认
+CTX-Q036,正常追问,g08,u08,u08,客户有多套TDH集群需要统一管理,多集群统一管理,TDC Data Services；TDH,那资源怎么统一调度？,否,是,TDC Data Services,TDC Data Services,管理追问,待产品专家确认
+CTX-Q037,正常追问,g08,u08,u08,客户有多套TDH集群需要统一管理,多集群统一管理,TDC Data Services；TDH,所以旧集群要迁移吗？,否,是,TDC Data Services,TDC Data Services,迁移追问,待产品专家确认
+CTX-Q038,正常追问,g08,u08,u08,客户有多套TDH集群需要统一管理,多集群统一管理,TDC Data Services；TDH,这个能跨集群共享数据吗？,否,是,TDC Data Services,TDC Data Services,能力追问,待产品专家确认
+CTX-Q039,正常追问,g08,u08,u08,客户有多套TDH集群需要统一管理,多集群统一管理,TDC Data Services；TDH,为什么要统一纳管？,否,是,TDC Data Services,TDC Data Services,价值追问,待产品专家确认
+CTX-Q040,正常追问,g08,u08,u08,客户有多套TDH集群需要统一管理,多集群统一管理,TDC Data Services；TDH,正常部署条件是什么？,否,是,TDC Data Services,TDC Data Services,条件追问,待产品专家确认
+CTX-Q041,同人换题,g09,u09,u09,客户要实时写入并完成数据治理,实时数据库治理,ArgoDB AP；TDS-SUITE-D,Astro目前更新了哪些主要功能？,否,否,Astro,Astro,新产品话题,待产品专家确认
+CTX-Q042,同人换题,g09,u09,u09,客户询问Astro智能治理能力,Astro智能治理,Astro；TDS-SUITE-D,TDH湖仓集一体版适合什么场景？,否,否,TDH湖仓集一体版,TDH 湖仓集一体版,新产品话题,待产品专家确认
+CTX-Q043,同人换题,g09,u09,u09,客户已有TDH数据湖需要实时入湖,TDH实时入湖,TDH 数据湖版；Slipstream,ArgoDB AP适合做实时分析吗？,否,否,ArgoDB AP,ArgoDB AP,新产品话题,待产品专家确认
+CTX-Q044,同人换题,g10,u10,u10,客户需要专业数据治理工具,专业数据治理,TDS-SUITE-D,LLMOps主要负责哪些能力？,否,否,LLMOps,无,新产品话题,待产品专家确认
+CTX-Q045,同人换题,g10,u10,u10,客户准备建设大模型运维平台,大模型运维,LLMOps,Scope可以替代Elasticsearch吗？,否,否,Scope,Scope,新产品话题,待产品专家确认
+CTX-Q046,同人换题,g10,u10,u10,客户咨询ES国产替代方案,ES信创替代,Scope,TDC Data Services如何统一管理多集群？,否,否,TDC Data Services,TDC Data Services,新产品话题,待产品专家确认
+CTX-Q047,同人换题,g11,u11,u11,客户有多套TDH集群要统一管理,多集群管理,TDC Data Services；TDH,TKH能提供哪些知识管理能力？,否,否,TKH,无,新产品话题,待产品专家确认
+CTX-Q048,同人换题,g11,u11,u11,客户需要建设企业知识库,知识管理,TKH,ArgoDB HTAP适合事务和分析混合场景吗？,否,否,ArgoDB HTAP,ArgoDB HTAP,新产品话题,待产品专家确认
+CTX-Q049,同人换题,g11,u11,u11,客户需要HTAP数据库承载交易分析,HTAP数据库,ArgoDB HTAP,TDH数据湖版如何支持批量数据处理？,否,否,TDH数据湖版,TDH 数据湖版,新产品话题,待产品专家确认
+CTX-Q050,同人换题,g12,u12,u12,客户需要建设企业级数据湖,企业数据湖,TDH 数据湖版,Astro的Pilot入口有什么作用？,否,否,Astro,Astro,新产品话题,待产品专家确认
+CTX-Q051,同人换题,g12,u12,u12,客户要用Astro作为智能交互入口,Astro交互入口,Astro,TDS-SUITE-R支持哪些实时同步场景？,否,否,TDS-SUITE-R,TDS-SUITE-R,新产品话题,待产品专家确认
+CTX-Q052,同人换题,g12,u12,u12,客户要通过TDS完成实时同步,实时数据同步,TDS-SUITE-R,TDH集市版适合哪些部门级数仓场景？,否,否,TDH集市版,TDH 集市版,新产品话题,待产品专家确认
+CTX-Q053,同人换题,g13,u13,u13,客户咨询TDH集市版的部门数仓能力,部门数仓,TDH 集市版,ArgoDB TP适合核心交易系统吗？,否,否,ArgoDB TP,ArgoDB TP,新产品话题,待产品专家确认
+CTX-Q054,同人换题,g13,u13,u13,客户需要核心交易数据库,交易数据库,ArgoDB TP,Astro能否生成资产标签建议？,否,否,Astro,Astro,新产品话题,待产品专家确认
+CTX-Q055,同人换题,g13,u13,u13,客户咨询Astro资产标签能力,Astro资产标签,Astro；TDS-SUITE-D,Scope支持ES 7系列API吗？,否,否,Scope,Scope,新产品话题,待产品专家确认
+CTX-Q056,同人换题,g14,u14,u14,客户要替代现有Elasticsearch集群,ES国产替代,Scope,TDH湖仓版有哪些统一存储能力？,否,否,TDH湖仓版,TDH 湖仓版,新产品话题,待产品专家确认
+CTX-Q057,同人换题,g14,u14,u14,客户咨询TDH湖仓统一存储方案,湖仓统一存储,TDH 湖仓版,LLMOps如何管理模型和算力？,否,否,LLMOps,无,新产品话题,待产品专家确认
+CTX-Q058,同人换题,g14,u14,u14,客户需要模型与算力管理平台,模型算力管理,LLMOps,TDS-SUITE-D能做哪些数据质量管理？,否,否,TDS-SUITE-D,TDS-SUITE-D,新产品话题,待产品专家确认
+CTX-Q059,同人换题,g15,u15,u15,客户需要数据质量和目录治理,数据质量治理,TDS-SUITE-D,TDC AI服务版适合什么AI服务场景？,否,否,TDC AI服务版,无,新产品话题,待产品专家确认
+CTX-Q060,同人换题,g15,u15,u15,客户咨询TDC AI服务能力,AI服务管理,TDC AI服务版,ArgoDB AP如何支撑实时数仓？,否,否,ArgoDB AP,ArgoDB AP,新产品话题,待产品专家确认
+CTX-Q061,同人换题,g15,u15,u15,客户建设实时数仓并要求实时可见,实时数仓,ArgoDB AP,TKH适合构建企业知识库吗？,否,否,TKH,无,新产品话题,待产品专家确认
+CTX-Q062,同人换题,g16,u16,u16,客户需要企业知识库与问答,企业知识库,TKH,TDH数据工程版包含哪些开发能力？,否,否,TDH数据工程版,TDH 数据工程版,新产品话题,待产品专家确认
+CTX-Q063,同人换题,g16,u16,u16,客户咨询TDH数据工程能力,数据工程,TDH 数据工程版,ArgoDB HTAP如何同时支持事务和分析？,否,否,ArgoDB HTAP,ArgoDB HTAP,新产品话题,待产品专家确认
+CTX-Q064,同人换题,g16,u16,u16,客户需要事务分析一体数据库,HTAP数据库,ArgoDB HTAP,Astro如何通过MCP调用治理工具？,否,否,Astro,Astro,新产品话题,待产品专家确认
+CTX-Q065,同人换题,g17,u17,u17,客户咨询Astro工具调用能力,Astro工具调用,Astro,TDC Platform Service有哪些平台管理能力？,否,否,TDC Platform Service,TDC Platform Service,新产品话题,待产品专家确认
+CTX-Q066,同人换题,g17,u17,u17,客户需要统一平台管理多个数据集群,统一平台管理,TDC Platform Service,Scope的国产替代适用条件是什么？,否,否,Scope,Scope,新产品话题,待产品专家确认
+CTX-Q067,同人换题,g17,u17,u17,客户咨询Scope替代ES的条件,ES替代条件,Scope,TDS-SUITE-E支持哪些数据开发能力？,否,否,TDS-SUITE-E,TDS-SUITE-E,新产品话题,待产品专家确认
+CTX-Q068,同人换题,g18,u18,u18,客户需要数据开发与任务调度,数据开发,TDS-SUITE-E,TDH湖仓集一体版如何做增量分析？,否,否,TDH湖仓集一体版,TDH 湖仓集一体版,新产品话题,待产品专家确认
+CTX-Q069,同人换题,g18,u18,u18,客户需要统一湖仓集和增量分析,湖仓增量分析,TDH 湖仓集一体版,ArgoDB TP有哪些强一致事务能力？,否,否,ArgoDB TP,ArgoDB TP,新产品话题,待产品专家确认
+CTX-Q070,同人换题,g18,u18,u18,客户咨询ArgoDB TP事务能力,事务数据库,ArgoDB TP,Astro主要有哪些专业智能体？,否,否,Astro,Astro,新产品话题,待产品专家确认
+CTX-Q071,跨用户,g19,u19a,u19b,客户要实时数据库加数据治理,实时数据库治理,ArgoDB AP；TDS-SUITE-D,所以正常能到多少？,否,否,多少,无,跨用户串话,待产品专家确认
+CTX-Q072,跨用户,g19,u19a,u19b,客户要实时数据库加数据治理,实时数据库治理,ArgoDB AP；TDS-SUITE-D,那银行能用吗？,否,否,银行,无,跨用户串话,待产品专家确认
+CTX-Q073,跨用户,g20,u20a,u20b,客户需要实时数据入湖,实时数据入湖,TDH 数据湖版；Slipstream,这个需要哪个版本？,否,否,版本,无,跨用户串话,待产品专家确认
+CTX-Q074,跨用户,g20,u20a,u20b,客户需要实时数据入湖,实时数据入湖,TDH 数据湖版；Slipstream,为什么还要两个产品？,否,否,两个产品,无,跨用户串话,待产品专家确认
+CTX-Q075,跨用户,g21,u21a,u21b,客户咨询Astro智能治理,Astro智能治理,Astro；TDS-SUITE-D,所以能直接治理吗？,否,否,直接治理,无,跨用户串话,待产品专家确认
+CTX-Q076,跨用户,g21,u21a,u21b,客户咨询Astro智能治理,Astro智能治理,Astro；TDS-SUITE-D,那标签怎么落库？,否,否,标签,无,跨用户串话,待产品专家确认
+CTX-Q077,跨用户,g22,u22a,u22b,客户要Oracle国产替代,Oracle国产替代,ArgoDB HTAP,这个兼容性怎么样？,否,否,兼容性,无,跨用户串话,待产品专家确认
+CTX-Q078,跨用户,g22,u22a,u22b,客户要Oracle国产替代,Oracle国产替代,ArgoDB HTAP,具体先评估什么？,否,否,评估,无,跨用户串话,待产品专家确认
+CTX-Q079,跨用户,g23,u23a,u23b,客户有多集群统一管理需求,多集群管理,TDC Data Services；TDH,所以要迁移旧集群吗？,否,否,迁移,无,跨用户串话,待产品专家确认
+CTX-Q080,跨用户,g23,u23a,u23b,客户有多集群统一管理需求,多集群管理,TDC Data Services；TDH,那资源怎么调度？,否,否,资源,无,跨用户串话,待产品专家确认
+CTX-Q081,跨用户,g24,u24a,u24b,客户需要ES国产替代,ES国产替代,Scope,这个支持哪些API？,否,否,API,无,跨用户串话,待产品专家确认
+CTX-Q082,跨用户,g24,u24a,u24b,客户需要ES国产替代,ES国产替代,Scope,所以迁移成本高吗？,否,否,迁移成本,无,跨用户串话,待产品专家确认
+CTX-Q083,跨用户,g25,u25a,u25b,客户需要模型和算力管理,模型算力管理,LLMOps,那GPU怎么调度？,否,否,GPU,无,跨用户串话,待产品专家确认
+CTX-Q084,跨用户,g25,u25a,u25b,客户需要模型和算力管理,模型算力管理,LLMOps,为什么要统一管理？,否,否,统一管理,无,跨用户串话,待产品专家确认
+CTX-Q085,跨用户,g26,u26a,u26b,客户需要企业知识库,企业知识库,TKH,这个能接现有数据吗？,否,否,现有数据,无,跨用户串话,待产品专家确认
+CTX-Q086,边界与引用,g27,u27,u27,客户要实时数据库与治理组合,实时数据库治理,ArgoDB AP；TDS-SUITE-D,实际怎么落地？,是,是,ArgoDB AP,ArgoDB AP,引用匹配,待产品专家确认
+CTX-Q087,边界与引用,g28,u28,u28,客户咨询Astro智能治理能力,Astro智能治理,Astro；TDS-SUITE-D,适用边界是什么？,是,是,Astro,Astro,引用匹配,待产品专家确认
+CTX-Q088,边界与引用,g29,u29,u29,客户需要实时数据入湖,实时数据入湖,TDH 数据湖版；Slipstream,交付时怎么说？,是,是,TDH 数据湖版,TDH 数据湖版,引用匹配,待产品专家确认
+CTX-Q089,边界与引用,g30,u30,u30,客户要Oracle国产替代,Oracle国产替代,ArgoDB HTAP,还有什么限制？,是,是,ArgoDB HTAP,ArgoDB HTAP,引用匹配,待产品专家确认
+CTX-Q090,边界与引用,g31,u31,u31,客户有多套集群要统一管理,多集群统一管理,TDC Data Services；TDH,能再具体一点吗？,是,是,TDC Data Services,TDC Data Services,引用匹配,待产品专家确认
+CTX-Q091,边界与引用,g32,u32,u32,客户要实时数据库与治理组合,实时数据库治理,ArgoDB AP；TDS-SUITE-D,还有哪些选择？,否,否,还有哪些选择,无,模糊默认新题,待产品专家确认
+CTX-Q092,边界与引用,g33,u33,u33,客户咨询Astro智能治理能力,Astro智能治理,Astro；TDS-SUITE-D,能说详细一点吗？,否,否,详细一点,无,模糊默认新题,待产品专家确认
+CTX-Q093,边界与引用,g34,u34,u34,客户需要实时数据入湖,实时数据入湖,TDH 数据湖版；Slipstream,再说说看？,否,否,再说说看,无,模糊默认新题,待产品专家确认
+CTX-Q094,边界与引用,g35,u35,u35,客户要Oracle国产替代,Oracle国产替代,ArgoDB HTAP,有别的考虑吗？,否,否,别的考虑,无,模糊默认新题,待产品专家确认
+CTX-Q095,边界与引用,g36,u36,u36,客户有多套集群要统一管理,多集群统一管理,TDC Data Services；TDH,怎么考虑比较好？,否,否,怎么考虑,无,模糊默认新题,待产品专家确认
+CTX-Q096,边界与引用,g37,u37,u37,客户要实时数据库与治理组合,实时数据库治理,ArgoDB AP；TDS-SUITE-D,再试一下,否,是,实时数据库,ArgoDB AP,失败重试,待产品专家确认
+CTX-Q097,边界与引用,g38,u38,u38,客户咨询Astro智能治理能力,Astro智能治理,Astro；TDS-SUITE-D,重新回答一次,否,是,Astro,Astro,失败重试,待产品专家确认
+CTX-Q098,边界与引用,g39,u39,u39,客户需要实时数据入湖,实时数据入湖,TDH 数据湖版；Slipstream,重试刚才的问题,否,是,实时数据入湖,TDH 数据湖版,失败重试,待产品专家确认
+CTX-Q099,边界与引用,g40,u40,u40,客户要Oracle国产替代,Oracle国产替代,ArgoDB HTAP,再查一次,否,是,Oracle,ArgoDB HTAP,失败重试,待产品专家确认
+CTX-Q100,边界与引用,g41,u41,u41,客户有多套集群要统一管理,多集群统一管理,TDC Data Services；TDH,重新来一遍,否,是,多套集群,TDC Data Services,失败重试,待产品专家确认

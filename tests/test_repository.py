@@ -25,6 +25,7 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/knowledge/TDH_SYNTHETIC_TEST_QUESTIONS_100.csv",
             "docs/knowledge/CROSS_PRODUCT_COMBINATION_MAPPING.csv",
             "docs/knowledge/CROSS_PRODUCT_SYNTHETIC_TEST_QUESTIONS_100.csv",
+            "docs/knowledge/CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv",
             "docs/superpowers/specs/2026-08-31-financial-presales-product-assistant-design.md",
             "docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md",
             "docs/superpowers/specs/2026-09-01-cross-product-combination-question-set-design.md",
@@ -297,6 +298,54 @@ class RepositoryQualityTests(unittest.TestCase):
             self.assertEqual("待产品专家确认", row["审核状态"])
             if row["资料冲突"] == "有":
                 self.assertNotEqual("高", row["推荐置信度"])
+
+    def test_context_two_turn_question_set_is_balanced(self):
+        path = ROOT / "docs/knowledge/CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv"
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertEqual(100, len(rows))
+        self.assertEqual(
+            [f"CTX-Q{number:03d}" for number in range(1, 101)],
+            [row["编号"] for row in rows],
+        )
+        self.assertEqual(
+            {
+                "正常追问": 40,
+                "同人换题": 30,
+                "跨用户": 15,
+                "边界与引用": 15,
+            },
+            {
+                category: sum(row["类别"] == category for row in rows)
+                for category in ["正常追问", "同人换题", "跨用户", "边界与引用"]
+            },
+        )
+        self.assertEqual(50, sum(row["期望是否继承"] == "是" for row in rows))
+        self.assertEqual(50, sum(row["期望是否继承"] == "否" for row in rows))
+        required_fields = [
+            "编号",
+            "类别",
+            "群聊ID",
+            "上一轮用户ID",
+            "当前用户ID",
+            "上一问",
+            "上一轮主题",
+            "上一轮产品",
+            "当前问",
+            "是否引用",
+            "期望是否继承",
+            "期望补全关键词",
+            "期望核心产品",
+            "风险标签",
+            "审核状态",
+        ]
+        for number, row in enumerate(rows, start=2):
+            for field in required_fields:
+                self.assertTrue(row[field].strip(), f"Missing {field} at row {number}")
+            self.assertIn(row["是否引用"], {"是", "否"})
+            self.assertIn(row["期望是否继承"], {"是", "否"})
+            self.assertEqual("待产品专家确认", row["审核状态"])
 
     def test_cross_product_question_set_is_balanced_and_covers_every_mapping(self):
         path = ROOT / "docs/knowledge/CROSS_PRODUCT_SYNTHETIC_TEST_QUESTIONS_100.csv"
