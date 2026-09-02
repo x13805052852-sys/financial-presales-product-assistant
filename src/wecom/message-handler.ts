@@ -6,7 +6,8 @@ import type {
   WsFrameHeaders,
 } from "@wecom/aibot-node-sdk";
 
-import type { PresalesAssistant } from "../app/presales-assistant.js";
+import type { ContextualQuestionAnswerer } from "../context/conversation-coordinator.js";
+import type { ConversationMessageContext } from "../context/types.js";
 
 export interface WecomReplyClient {
   replyStream(
@@ -65,20 +66,21 @@ export class WecomMessageHandler {
   private readonly processedOrder: string[] = [];
 
   constructor(
-    private readonly assistant: PresalesAssistant,
+    private readonly assistant: ContextualQuestionAnswerer,
     private readonly client: WecomReplyClient,
     private readonly logger: MessageHandlerLogger = defaultLogger,
     private readonly deduplicationLimit = 1_000,
   ) {}
 
   async handleText(frame: WsFrame<TextMessage>): Promise<void> {
-    const messageId = frame.body?.msgid;
+    const body = frame.body;
+    const messageId = body?.msgid;
     if (!messageId || this.isDuplicate(messageId)) {
       return;
     }
 
     const streamId = generateReqId("presales");
-    const question = normalizeIncomingText(frame.body?.text.content ?? "");
+    const question = normalizeIncomingText(body.text.content ?? "");
     try {
       await this.client.replyStream(frame, streamId, "正在查询产品资料，请稍候……", false);
     } catch {
@@ -86,7 +88,15 @@ export class WecomMessageHandler {
     }
 
     try {
-      const result = await this.assistant.answerQuestion(question, messageId);
+      const context: ConversationMessageContext = {
+        identity: {
+          chatType: body.chattype,
+          ...(body.chatid ? { chatId: body.chatid } : {}),
+          userId: body.from.userid,
+        },
+        ...(body.quote?.text?.content ? { quoteText: body.quote.text.content } : {}),
+      };
+      const result = await this.assistant.answerQuestion(question, messageId, context);
       await this.client.replyStream(frame, streamId, fitWecomContent(result.message), true);
       this.logger.info(`Answered WeCom message ${messageId} with status ${result.status}`);
     } catch {

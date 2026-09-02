@@ -3,6 +3,8 @@ import { WSClient } from "@wecom/aibot-node-sdk";
 import { JsonlAuditLogger } from "../app/audit-logger.js";
 import { PresalesAssistant } from "../app/presales-assistant.js";
 import { loadRuntimeConfig } from "../config.js";
+import { ConversationCoordinator } from "../context/conversation-coordinator.js";
+import { OneTurnContextStore } from "../context/one-turn-context-store.js";
 import { loadKnowledgeBase } from "../knowledge/loader.js";
 import { OpenAiCompatibleClient } from "../model/openai-compatible-client.js";
 import { WecomMessageHandler } from "../wecom/message-handler.js";
@@ -17,13 +19,17 @@ const client = new WSClient({
   maxAuthFailureAttempts: 3,
   logger: sdkLogger,
 });
-const assistant = new PresalesAssistant({
+const presalesAssistant = new PresalesAssistant({
   knowledgeBase: loadKnowledgeBase(),
   model: new OpenAiCompatibleClient(config.llm),
   modelName: config.llm.model,
   knowledgeMode: config.knowledgeMode,
   logger: new JsonlAuditLogger(config.logDir),
 });
+const assistant = new ConversationCoordinator(
+  presalesAssistant,
+  new OneTurnContextStore(),
+);
 const handler = new WecomMessageHandler(assistant, client, sdkLogger);
 
 client.on("authenticated", () => {

@@ -4,6 +4,12 @@ import { join } from "node:path";
 
 import type { AnswerFrameworkId } from "../model/answer-framework.js";
 
+export interface ContextAuditMetadata {
+  contextDecision: "follow_up" | "new_question";
+  contextScore: number;
+  contextRules: string[];
+}
+
 export interface AuditEvent {
   requestId: string;
   timestamp: string;
@@ -15,6 +21,9 @@ export interface AuditEvent {
   elapsedMs: number;
   errorCode?: string;
   answerFramework?: AnswerFrameworkId;
+  contextDecision?: ContextAuditMetadata["contextDecision"];
+  contextScore?: number;
+  contextRules?: string[];
 }
 
 export interface AuditLogger {

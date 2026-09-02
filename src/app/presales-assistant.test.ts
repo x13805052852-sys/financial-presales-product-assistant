@@ -66,6 +66,11 @@ test("answers an in-scope question and records auditable knowledge IDs", async (
   const result = await assistant.answerQuestion(
     "我想要实时流入数据库并且带有数据治理，应当怎么搭配？",
     "request-1",
+    {
+      contextDecision: "new_question",
+      contextScore: -1,
+      contextRules: ["no_topic_overlap"],
+    },
   );
 
   assert.equal(result.status, "answered");
@@ -74,8 +79,14 @@ test("answers an in-scope question and records auditable knowledge IDs", async (
   assert.ok(result.sources.length > 0);
   assert.equal(result.experimental, true);
   assert.equal(result.answerFramework, "solution_recommendation");
+  assert.ok(result.groundingSummary?.products.includes("ArgoDB AP"));
+  assert.ok(result.groundingSummary?.capabilities.some((item) => item.includes("治理")));
+  assert.ok(result.groundingSummary?.recommendations.some((item) => item.includes("TDS-SUITE-D")));
   assert.equal(logger.events[0]?.status, "answered");
   assert.equal(logger.events[0]?.answerFramework, "solution_recommendation");
+  assert.equal(logger.events[0]?.contextDecision, "new_question");
+  assert.equal(logger.events[0]?.contextScore, -1);
+  assert.deepEqual(logger.events[0]?.contextRules, ["no_topic_overlap"]);
   assert.equal(logger.events[0]?.questionPreview.includes("API_KEY"), false);
 });
 
@@ -161,6 +172,7 @@ test("returns a safe message when the model fails", async () => {
 
   assert.equal(result.status, "model_error");
   assert.equal(result.message, "服务暂时不可用，请稍后重试。");
+  assert.ok(result.groundingSummary?.knowledgeIds.length);
   assert.doesNotMatch(result.message, /secret internal failure/);
 });
 

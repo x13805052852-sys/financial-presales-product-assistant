@@ -5,13 +5,20 @@ import { MessageType } from "@wecom/aibot-node-sdk";
 import type { TextMessage, WsFrame } from "@wecom/aibot-node-sdk";
 
 import type { AnswerResult } from "../app/presales-assistant.js";
+import type { ConversationMessageContext } from "../context/types.js";
 import { fitWecomContent, normalizeIncomingText, WecomMessageHandler } from "./message-handler.js";
 
 class FakeAssistant {
   readonly questions: string[] = [];
+  readonly contexts: ConversationMessageContext[] = [];
 
-  async answerQuestion(question: string, requestId: string): Promise<AnswerResult> {
+  async answerQuestion(
+    question: string,
+    requestId: string,
+    context: ConversationMessageContext,
+  ): Promise<AnswerResult> {
     this.questions.push(question);
+    this.contexts.push(context);
     return {
       requestId,
       status: "answered",
@@ -55,6 +62,7 @@ function textFrame(messageId = "message-1", content = "@金融售前产品助手
     body: {
       msgid: messageId,
       aibotid: "bot-1",
+      chatid: "group-1",
       chattype: "group",
       from: { userid: "user-1" },
       msgtype: MessageType.Text,
@@ -78,11 +86,33 @@ test("sends a processing state and then the final answer", async () => {
   await handler.handleText(textFrame());
 
   assert.deepEqual(assistant.questions, ["客户需要数据湖"]);
+  assert.deepEqual(assistant.contexts, [
+    {
+      identity: { chatType: "group", chatId: "group-1", userId: "user-1" },
+    },
+  ]);
   assert.equal(client.streams.length, 2);
   assert.equal(client.streams[0]?.finish, false);
   assert.match(client.streams[0]?.content ?? "", /正在查询/);
   assert.equal(client.streams[1]?.finish, true);
   assert.match(client.streams[1]?.content ?? "", /推荐组合/);
+});
+
+test("passes quoted text to the conversation layer", async () => {
+  const assistant = new FakeAssistant();
+  const client = new FakeReplyClient();
+  const handler = new WecomMessageHandler(assistant as never, client, silentLogger);
+  const frame = textFrame("quoted", "@金融售前产品助手 所以呢？");
+  if (frame.body) {
+    frame.body.quote = {
+      msgtype: "text",
+      text: { content: "上一轮回答" },
+    };
+  }
+
+  await handler.handleText(frame);
+
+  assert.equal(assistant.contexts[0]?.quoteText, "上一轮回答");
 });
 
 test("ignores a duplicate message ID", async () => {
