@@ -48,6 +48,11 @@ const validRiskAnswer = [
   "实际影响：影响智能体总数、正式名称和交付版本的销售表述。",
   "销售口径：可以描述资料明确的具体能力，数量和名称按目标版本确认。",
 ].join("\n");
+const validLlmopsAnswer = [
+  "结论：可以用以下产品组合建设可进入业务流程的专家数字员工。",
+  "推荐组合：Agent Go + Knowledge Lodge + AI Infra",
+  "产品分工：Agent Go 负责 Agent Buddy 构建与运行，Knowledge Lodge 负责可验证知识，AI Infra 负责资产、权限和审计。",
+].join("\n");
 
 test("answers an in-scope question and records auditable knowledge IDs", async () => {
   const logger = new MemoryLogger();
@@ -100,6 +105,22 @@ test("uses the product overview framework for feature questions", async () => {
   assert.equal(result.answerFramework, "product_overview");
   assert.match(model.requests[0]?.messages[0]?.content ?? "", /产品功能介绍/);
   assert.doesNotMatch(result.message, /^推荐组合[：:]/mu);
+});
+
+test("answers an LLMOps expert digital employee question from the new knowledge set", async () => {
+  const model = new StubModel([validLlmopsAnswer]);
+  const assistant = new PresalesAssistant({ knowledgeBase, model, modelName: "test-model" });
+
+  const result = await assistant.answerQuestion(
+    "客户要把专家岗位做成能使用企业知识和工具的数字员工，怎么搭配？",
+  );
+
+  assert.equal(result.status, "answered");
+  assert.equal(result.answerFramework, "solution_recommendation");
+  assert.ok(result.knowledgeIds.some((id) => ["LLM-M001", "LLM-M009"].includes(id)));
+  assert.match(result.message, /Agent Go/);
+  assert.match(result.message, /Knowledge Lodge/);
+  assert.match(result.message, /AI Infra/);
 });
 
 test("uses the risk explanation framework for material conflicts", async () => {

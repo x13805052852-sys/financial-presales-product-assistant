@@ -29,7 +29,7 @@
 
 ## 文档导航
 
-- [当前项目进度（2026-09-02）](docs/PROGRESS_STATUS_2026-09-02.md)
+- [当前项目进度（2026-09-03）](docs/PROGRESS_STATUS_2026-09-03.md)
 - [产品设计](docs/superpowers/specs/2026-08-31-financial-presales-product-assistant-design.md)
 - [TDH 100 条模拟销售问题测试集设计](docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md)
 - [跨产品组合映射与第二批 100 条模拟问题设计](docs/superpowers/specs/2026-09-01-cross-product-combination-question-set-design.md)
@@ -38,17 +38,27 @@
 - [企业微信运行版 V0.1 设计](docs/superpowers/specs/2026-09-01-wecom-mvp-runtime-design.md)
 - [企业微信单轮上下文识别设计](docs/superpowers/specs/2026-09-02-one-turn-context-resolution-design.md)
 - [企业微信单轮上下文实施计划](docs/superpowers/plans/2026-09-02-one-turn-context-resolution-implementation-plan.md)
+- [LLMOps 知识准备设计](docs/superpowers/specs/2026-09-03-llmops-knowledge-preparation-design.md)
+- [LLMOps 知识准备实施计划](docs/superpowers/plans/2026-09-03-llmops-knowledge-preparation-implementation-plan.md)
 - [五天内部执行计划](docs/PROJECT_EXECUTION_PLAN.md)
 - [上线验收标准](docs/ACCEPTANCE_CRITERIA.md)
 - [资料准备说明](docs/DATA_PREPARATION_GUIDE.md)
 - [任务追踪表](docs/TASK_TRACKER.md)
 - [TDH 资料筛选报告](docs/TDH_SOURCE_ASSESSMENT.md)
+- [LLMOps 资料筛选报告](docs/LLMOPS_SOURCE_ASSESSMENT.md)
 - [跨产品组合资料筛选报告](docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md)
 - [TDH 逐文件资料清单](docs/TDH_SOURCE_INVENTORY.csv)
+- [LLMOps 逐文件资料清单](docs/LLMOPS_SOURCE_INVENTORY.csv)
+- [LLMOps 知识准备 TODO](docs/LLMOPS_KNOWLEDGE_TODO.md)
 - [领域词汇表](CONTEXT.md)
 - [TDH 产品标准名与别名](docs/knowledge/TDH_PRODUCT_ALIASES.csv)
 - [TDH 能力—产品映射初稿](docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv)
 - [TDH 100 条模拟销售问题](docs/knowledge/TDH_SYNTHETIC_TEST_QUESTIONS_100.csv)
+- [LLMOps 产品及组件别名](docs/knowledge/LLMOPS_PRODUCT_ALIASES.csv)
+- [LLMOps 功能—产品映射](docs/knowledge/LLMOPS_CAPABILITY_PRODUCT_MAPPING.csv)
+- [LLMOps 场景—组合映射](docs/knowledge/LLMOPS_COMBINATION_MAPPING.csv)
+- [LLMOps 100 条单轮模拟销售问题](docs/knowledge/LLMOPS_SYNTHETIC_TEST_QUESTIONS_100.csv)
+- [LLMOps 100 组双轮上下文测试](docs/knowledge/LLMOPS_CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv)
 - [跨产品组合映射](docs/knowledge/CROSS_PRODUCT_COMBINATION_MAPPING.csv)
 - [第二批 100 条跨产品模拟销售问题](docs/knowledge/CROSS_PRODUCT_SYNTHETIC_TEST_QUESTIONS_100.csv)
 - [100 组双轮上下文测试](docs/knowledge/CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv)
@@ -73,6 +83,8 @@
 当前 TDH 映射仍处于“待产品专家确认”状态，只能用于内部实验和测试，不能直接作为对客承诺。
 
 跨产品组合映射覆盖 TDH、ArgoDB、TDC、TDS 和 Astro，同样处于“待产品专家确认”状态。Astro 资料中的智能体数量和个别名称存在版本口径差异，机器人必须按目标版本提示确认，不能硬性回答。
+
+LLMOps 首版已覆盖 Corpus Studio、Model Foundry、Knowledge Lodge、Agent Go、AI Infra 五个产品域及主要组件。当前映射仍处于内部实验状态；旧版本、规划能力、测试数字和竞品材料不会作为默认对客口径。
 
 ## 自动测试
 

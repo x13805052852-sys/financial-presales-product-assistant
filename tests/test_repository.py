@@ -19,6 +19,8 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/DATA_PREPARATION_GUIDE.md",
             "docs/TDH_SOURCE_ASSESSMENT.md",
             "docs/LLMOPS_SOURCE_ASSESSMENT.md",
+            "docs/LLMOPS_KNOWLEDGE_TODO.md",
+            "docs/PROGRESS_STATUS_2026-09-03.md",
             "docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md",
             "docs/TDH_SOURCE_INVENTORY.csv",
             "docs/LLMOPS_SOURCE_INVENTORY.csv",
