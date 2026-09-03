@@ -1,0 +1,25 @@
+﻿标准名称,实体类型,所属对象,英文名或License Code,可识别别名,禁止混用,首版使用规则,资料来源,确认状态
+LLMOps,产品线,,Sophon LLMOps,Sophon LLMOps;星环大模型运营平台;大模型运营平台;企业AI中台;LLMOps 3.0,单一组件;Astro,泛指整条产品线时使用；推荐时尽量落到五个产品域或具体组件,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=29,待产品专家确认
+Corpus Studio,产品域,LLMOps,Corpus Studio,星解;语料开发与管理;语料平台;语料工厂,Knowledge Lodge;传统结构化数据治理平台,用于多模态语料处理、增强、标注、评测和高质量数据生产,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=29,待产品专家确认
+Model Foundry,产品域,LLMOps,Model Foundry,星铸;模型工厂;模型与算力工厂;模型训练和算力运营,TokenFactory;单纯GPU资源池,负责模型与算力管理；TokenFactory 是其统一模型服务能力,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=21,待产品专家确认
+TokenFactory,组件,Model Foundry,TokenFactory,词元工厂;Token工厂;Token Factory;统一模型服务层;统一模型网关,Model Foundry;独立第六产品域,用于模型接入、路由、配额计量、故障切换和 Token 效能；不得脱离测试条件承诺性能,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=21;LLMOps3：TokenFactory词元工厂.pptx#slide=10-11,待产品专家确认
+Knowledge Lodge,产品域,LLMOps,Knowledge Lodge,星典;知识工程;知识管理工具;企业知识库平台,Corpus Studio;TKH,用于知识工程、检索增强、业务本体和知识服务；跨产品 TKH 边界需单独确认,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=13;page=29,待产品专家确认
+Agent Go,产品域,LLMOps,Agent Go,星将;AgentGo;智能体开发平台;星构（历史名称）,AgentBox;Astro,当前 3.0 回答使用“星将”；识别到“星构”时提示旧名称并确认版本,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=29;LLMOps3：大模型时代下的AI中台.pptx#slide=3,待产品专家确认
+AI Infra,产品域,LLMOps,AI Infra,企业级AI基础层;AI基础设施;统一治理底座;AI基础层,TDC AI服务版;单纯IaaS,负责统一资产、身份权限、安全审计、资源和运行治理；跨 TDC 边界需确认,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=29;LLMOps3：平台介绍-AI转型 .pptx#slide=5,待产品专家确认
+AgentBox,组件,Agent Go,AgentBox,智能体工作台;Agent工作台;在线VibeCoding平台;浏览器Vibe Coding,Agent Buddy;Agent Go,AgentBox 是构建网页应用和 Agent Buddy 的工作台，不是最终交付的数字员工,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=15;LLMOps3：AgentGo 智能体平台.pptx#slide=5,待产品专家确认
+Agent Buddy,交付物,Agent Go,Agent Buddy,数字员工;专家数字员工;AI工作单元;企业数字员工,AgentBox;普通聊天角色,表示封装岗位、知识、技能、代码、工具、权限和会话能力的已发布数字员工,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=15;LLMOps3：平台介绍-AI转型 .pptx#slide=10,待产品专家确认
+Agent Session Manager,组件,Agent Go,Agent Session Manager,会话控制平面;统一会话管理;Agent会话管理器;ASM,企业微信机器人本身;模型网关,用于跨 Agent、跨渠道会话、审计、Memory、反馈和人工接管,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=17;LLMOps3：平台介绍-AI转型 .pptx#slide=11,待产品专家确认
+KB Agent,组件,Knowledge Lodge,KB Agent,知识库智能体;建库智能体;知识加工智能体,Agent Buddy;通用聊天机器人,用于把分散资料加工成带版本、来源和测试集的上下文资产,LLMOps3：平台介绍-AI转型 .pptx#slide=8;LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=28,待产品专家确认
+Catalog,组件,AI Infra,Catalog,资产目录;AI资产目录;统一资产目录;资产治理目录,Discover;TDS Catalog,负责资产身份、Owner、标签、版本和治理元数据；与 TDS 同名能力需确认产品线,LLMOps3：平台介绍-AI转型 .pptx#slide=7;LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=28,待产品专家确认
+Discover,组件,AI Infra,Discover,资产发现;权限感知搜索;AI资产搜索,Catalog,负责按权限搜索、判断、申请和复用资产，不承担资产治理写入,LLMOps3：平台介绍-AI转型 .pptx#slide=7,待产品专家确认
+Workbench,组件,Agent Go,Workbench,Agent原型工作台;智能体原型;应用工作台,AgentBox;Agent Buddy,用于组合目标、工具、输出、异常、证据和测试，形成可测试 Agent 原型,LLMOps3：平台介绍-AI转型 .pptx#slide=9,待产品专家确认
+Coworker,交互入口,Agent Go,Coworker,协作入口;AI协作助手;多端协作入口,Agent Buddy;企业微信,作为发现和使用 AI 工作单元的交互入口；具体渠道支持按版本确认,LLMOps3：平台介绍-AI转型 .pptx#slide=5;slide=16,待产品专家确认
+Connection,数据对象,Corpus Studio,Connection,数据连接;连接对象;数据源连接,Sync Job;Document Record,只保存身份、Endpoint、Secret 引用和安全范围，不等同于同步任务,LLMOps3：平台介绍-AI转型 .pptx#slide=6,待产品专家确认
+Sync Job,数据对象,Corpus Studio,Sync Job,同步任务;增量同步任务;采集任务,Connection;Document Record,定义目录、过滤、增量、调度、重试和幂等，凭证应引用 Connection,LLMOps3：平台介绍-AI转型 .pptx#slide=6,待产品专家确认
+Document Record,数据对象,Corpus Studio,Document Record,文件记录;文档记录;来源记录,Connection;Sync Job,记录来源、版本、哈希、解析状态和删除影响，支持追踪与重放,LLMOps3：平台介绍-AI转型 .pptx#slide=6,待产品专家确认
+KnowledgeBase,知识资产,Knowledge Lodge,KnowledgeBase,知识库;知识服务;企业知识资产,KB Agent;TKH,KB Agent 负责构建和验证，KnowledgeBase 是发布与消费的知识资产,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=28;LLMOps3：大模型时代下的AI中台.pptx#slide=10-11,待产品专家确认
+Skills,资产类型,Agent Go,Skills,技能;能力包;Agent技能;工具能力包,Tools;Rules;Templates,表示可复用的专家工作流与工具能力包，不等同于底层工具本身,LLMOps3：AgentGo 智能体平台.pptx#slide=8;LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=28,待产品专家确认
+CodeBase,资产类型,Agent Go,CodeBase,代码资产;代码库;企业代码资产,KnowledgeBase;Skills,作为 Agent Buddy 可引用的工程资产，需受 Catalog、权限和版本治理,LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=28,待产品专家确认
+Model Gateway,组件,TokenFactory,Model Gateway,模型网关;统一模型网关;大模型服务网关,API Gateway;数据服务网关,负责模型端点的标准接入、鉴权、路由、错误重试和调用治理,LLMOps3：平台介绍-AI转型 .pptx#slide=13;LLMOps3 上新：企业内部的Agent Engineering 是什么？LLMOps是如何做的？—260716（范豪钧）.pdf#page=21,待产品专家确认
+Harness Engineering,方法,Agent Go,Harness Engineering,Harness工程;智能体工程护栏;工程控制系统,单一代码生成;Vibe Coding,表示 Guides 与 Sensors 形成的工程控制闭环，不作为独立产品售卖,LLMOps3：AgentGo 智能体平台.pptx#slide=3;slide=6,待产品专家确认
+Vibe Coding,开发方式,Agent Go,Vibe Coding,VibeCoding;自然语言编程;对话式开发;浏览器编程,AgentBox;自动无审核上线,表示通过自然语言和浏览器快速构建应用；生产发布仍需测试、权限和门禁,LLMOps3：AgentGo 智能体平台.pptx#slide=5;slide=7;LLMOps3：平台介绍-AI转型 .pptx#slide=12,待产品专家确认

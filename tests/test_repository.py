@@ -25,6 +25,11 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/knowledge/TDH_PRODUCT_ALIASES.csv",
             "docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv",
             "docs/knowledge/TDH_SYNTHETIC_TEST_QUESTIONS_100.csv",
+            "docs/knowledge/LLMOPS_PRODUCT_ALIASES.csv",
+            "docs/knowledge/LLMOPS_CAPABILITY_PRODUCT_MAPPING.csv",
+            "docs/knowledge/LLMOPS_COMBINATION_MAPPING.csv",
+            "docs/knowledge/LLMOPS_SYNTHETIC_TEST_QUESTIONS_100.csv",
+            "docs/knowledge/LLMOPS_CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv",
             "docs/knowledge/CROSS_PRODUCT_COMBINATION_MAPPING.csv",
             "docs/knowledge/CROSS_PRODUCT_SYNTHETIC_TEST_QUESTIONS_100.csv",
             "docs/knowledge/CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv",
@@ -41,6 +46,7 @@ class RepositoryQualityTests(unittest.TestCase):
             "scripts/setup_git_hooks.sh",
             "scripts/build_cross_product_question_set.mjs",
             "scripts/build_llmops_inventory.py",
+            "scripts/build_llmops_knowledge.py",
         ]
         missing = [path for path in required if not (ROOT / path).is_file()]
         self.assertEqual([], missing, f"Missing required files: {missing}")
@@ -167,6 +173,139 @@ class RepositoryQualityTests(unittest.TestCase):
             self.assertTrue(row["recommended_use"], f"Missing use at row {number}")
             self.assertTrue(row["risk_or_action"], f"Missing risk at row {number}")
             self.assertTrue(row["extraction_status"], f"Missing status at row {number}")
+
+    def test_llmops_product_aliases_are_unique_and_auditable(self):
+        path = ROOT / "docs/knowledge/LLMOPS_PRODUCT_ALIASES.csv"
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertEqual(24, len(rows))
+        canonical_names = [row["标准名称"].strip() for row in rows]
+        self.assertEqual(24, len(set(canonical_names)))
+        for number, row in enumerate(rows, start=2):
+            self.assertTrue(row["实体类型"].strip(), f"Missing entity type at row {number}")
+            self.assertTrue(row["首版使用规则"].strip(), f"Missing rule at row {number}")
+            self.assertIn("#", row["资料来源"], f"Missing source locator at row {number}")
+            self.assertEqual("待产品专家确认", row["确认状态"])
+
+    def test_llmops_capability_mapping_has_complete_evidence(self):
+        path = ROOT / "docs/knowledge/LLMOPS_CAPABILITY_PRODUCT_MAPPING.csv"
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertEqual(34, len(rows))
+        self.assertEqual(34, len({row["标准功能"] for row in rows}))
+        required_fields = [
+            "客户原始需求",
+            "标准功能",
+            "解决方案",
+            "主推产品",
+            "推荐理由",
+            "适用条件",
+            "排除条件",
+            "资料来源",
+        ]
+        for number, row in enumerate(rows, start=2):
+            for field in required_fields:
+                self.assertTrue(row[field].strip(), f"Missing {field} at row {number}")
+            self.assertIn("#", row["资料来源"], f"Missing source locator at row {number}")
+            self.assertEqual("待产品专家确认", row["确认人"])
+
+    def test_llmops_combination_mapping_is_complete_and_auditable(self):
+        path = ROOT / "docs/knowledge/LLMOPS_COMBINATION_MAPPING.csv"
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertEqual(15, len(rows))
+        self.assertEqual(
+            [f"LLM-M{number:03d}" for number in range(1, 16)],
+            [row["映射编号"] for row in rows],
+        )
+        required_fields = [
+            "销售复合需求",
+            "能力拆分",
+            "主推组合",
+            "产品分工",
+            "可选组合",
+            "适用条件",
+            "必须追问",
+            "排除条件",
+            "资料来源",
+            "资料冲突",
+            "推荐置信度",
+            "审核状态",
+        ]
+        for number, row in enumerate(rows, start=2):
+            for field in required_fields:
+                self.assertTrue(row[field].strip(), f"Missing {field} at row {number}")
+            self.assertIn("#", row["资料来源"], f"Missing source locator at row {number}")
+            self.assertIn("：", row["产品分工"])
+            self.assertIn(row["资料冲突"], {"有", "无"})
+            self.assertIn(row["推荐置信度"], {"高", "中", "低"})
+            self.assertEqual("待产品专家确认", row["审核状态"])
+            if row["资料冲突"] == "有":
+                self.assertNotEqual("高", row["推荐置信度"])
+
+    def test_llmops_synthetic_question_set_covers_every_mapping(self):
+        questions_path = ROOT / "docs/knowledge/LLMOPS_SYNTHETIC_TEST_QUESTIONS_100.csv"
+        with questions_path.open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertEqual(100, len(rows))
+        self.assertEqual(
+            [f"LLM-Q{number:03d}" for number in range(1, 101)],
+            [row["编号"] for row in rows],
+        )
+        self.assertEqual(100, len({row["模拟销售提问"] for row in rows}))
+        with (
+            ROOT / "docs/knowledge/LLMOPS_CAPABILITY_PRODUCT_MAPPING.csv"
+        ).open(encoding="utf-8-sig", newline="") as handle:
+            known_mappings = {row["标准功能"] for row in csv.DictReader(handle)}
+        covered_mappings = {
+            row["对应映射"]
+            for row in rows
+            if row["对应映射"] != "安全边界（无产品映射）"
+        }
+        self.assertEqual(known_mappings, covered_mappings)
+        allowed_actions = {
+            "直接推荐",
+            "推荐并说明边界",
+            "先追问再推荐",
+            "拒绝确定性承诺",
+        }
+        for number, row in enumerate(rows, start=2):
+            self.assertEqual("模拟问题", row["数据性质"])
+            self.assertIn(row["预期动作"], allowed_actions)
+            self.assertIn("#", row["资料来源"], f"Missing source locator at row {number}")
+            self.assertEqual("待产品专家确认", row["审核状态"])
+            if row["预期动作"] == "先追问再推荐":
+                self.assertEqual("待补充信息", row["预期主推产品"])
+                self.assertNotEqual("无", row["缺失信息"])
+                self.assertNotEqual("无", row["必须追问"])
+
+    def test_llmops_context_question_set_is_balanced(self):
+        path = ROOT / "docs/knowledge/LLMOPS_CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv"
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertEqual(100, len(rows))
+        self.assertEqual(
+            [f"LLM-CTX-Q{number:03d}" for number in range(1, 101)],
+            [row["编号"] for row in rows],
+        )
+        self.assertEqual(
+            {"正常追问": 40, "同人换题": 30, "跨用户": 15, "边界与引用": 15},
+            {
+                category: sum(row["类别"] == category for row in rows)
+                for category in ["正常追问", "同人换题", "跨用户", "边界与引用"]
+            },
+        )
+        self.assertEqual(50, sum(row["期望是否继承"] == "是" for row in rows))
+        self.assertEqual(50, sum(row["期望是否继承"] == "否" for row in rows))
+        for row in rows:
+            self.assertIn(row["是否引用"], {"是", "否"})
+            self.assertIn(row["期望是否继承"], {"是", "否"})
+            self.assertEqual("待产品专家确认", row["审核状态"])
 
     def test_tdh_product_aliases_are_unique_and_auditable(self):
         path = ROOT / "docs/knowledge/TDH_PRODUCT_ALIASES.csv"
