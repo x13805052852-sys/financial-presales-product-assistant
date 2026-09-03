@@ -563,14 +563,27 @@ TOPICS = [
     ("人机接管", "客户要求关键Agent动作必须人工确认并可追溯。", "Agent Go + Agent Session Manager + AI Infra"),
 ]
 
+TOPIC_KEYWORDS = {
+    "多模态语料": "语料",
+    "知识库建设": "知识库",
+    "模型服务": "模型",
+    "专家数字员工": "数字员工",
+    "资产治理": "资产",
+    "Vibe Coding": "自然语言",
+    "会话治理": "会话",
+    "模型评测": "模型",
+    "多索引检索": "检索",
+    "人机接管": "人工确认",
+}
+
 
 def build_context_questions() -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     followups = [
         "那它主要负责哪一部分？",
         "这个组合里各模块怎么分工？",
-        "上线前还需要确认什么？",
-        "如果要长期运营还缺什么？",
+        "那上线前还需要确认什么？",
+        "那如果要长期运营还缺什么？",
         "它和刚才提到的另一个模块有什么边界？",
     ]
     for index in range(40):
@@ -614,7 +627,7 @@ def build_context_questions() -> list[dict[str, str]]:
                 "当前问": current,
                 "是否引用": "否",
                 "期望是否继承": "否",
-                "期望补全关键词": new_topic,
+                "期望补全关键词": TOPIC_KEYWORDS[new_topic],
                 "期望核心产品": current_product,
                 "风险标签": "同人换题",
                 "审核状态": REVIEW,
@@ -656,7 +669,11 @@ def build_context_questions() -> list[dict[str, str]]:
             else TOPICS[(offset + 5) % len(TOPICS)][1]
         )
         expected_product = product if inherits else TOPICS[(offset + 5) % len(TOPICS)][2]
-        expected_keyword = topic if inherits else TOPICS[(offset + 5) % len(TOPICS)][0]
+        expected_keyword = (
+            topic
+            if inherits
+            else TOPIC_KEYWORDS[TOPICS[(offset + 5) % len(TOPICS)][0]]
+        )
         rows.append(
             {
                 "编号": f"LLM-CTX-Q{number:03d}",

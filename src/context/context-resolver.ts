@@ -22,6 +22,11 @@ const conceptTerms: Record<string, string[]> = {
   lake: ["数据湖", "湖仓", "入湖", "hadoop", "cdh"],
   service: ["数据服务", "接口", "api", "对外提供"],
   intelligence: ["智能体", "智能治理", "自动识别", "智能助手"],
+  corpus: ["语料", "标注", "问答对", "多模态", "清洗"],
+  modelOperations: ["模型", "训练", "微调", "评测", "推理", "token", "算力", "gpu"],
+  knowledgeEngineering: ["知识库", "知识工程", "rag", "检索", "索引", "业务本体"],
+  agentEngineering: ["agent", "数字员工", "agentbox", "会话", "人工接管"],
+  aiGovernance: ["catalog", "discover", "权限", "审计", "workspace", "secret", "资产"],
 };
 
 const continuationPattern = /^(?:所以|那么|那|这个|这种|它|其|上述|刚才|为什么|具体|详细|正常)/u;

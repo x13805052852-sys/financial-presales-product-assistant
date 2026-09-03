@@ -28,7 +28,7 @@ test("loads aliases and both kinds of auditable knowledge", () => {
   assert.ok(knowledgeBase.entries.some((entry) => entry.kind === "capability"));
   assert.equal(
     knowledgeBase.entries.filter((entry) => entry.kind === "combination").length,
-    40,
+    55,
   );
   assert.ok(knowledgeBase.entries.every((entry) => entry.id && entry.sources.length > 0));
 });
@@ -38,6 +38,11 @@ test("normalizes product aliases without losing the canonical product", () => {
   assert.ok(
     recognizeProducts("客户要用 Inceptor 湖仓集版做批流一体", knowledgeBase.aliases).includes(
       "TDH 湖仓集一体版",
+    ),
+  );
+  assert.ok(
+    recognizeProducts("词元工厂需要按SLA路由模型", knowledgeBase.aliases).includes(
+      "TokenFactory",
     ),
   );
 });
@@ -70,10 +75,43 @@ test("does not classify pending knowledge as confirmed evidence", () => {
   );
 });
 
-test("runs all 200 synthetic questions with auditable top-three results", () => {
+test("retrieves the LLMOps multi-model service and Token operations combination", () => {
+  const result = retrieveKnowledge(
+    "客户有多个私有和外部模型，希望统一接入并按SLA和成本路由，还要统计Token用量。",
+    knowledgeBase,
+  );
+  const ids = result.hits.map((hit) => hit.entry.id);
+
+  assert.ok(ids.includes("LLM-M003"), ids.join(","));
+});
+
+test("retrieves the LLMOps high-quality RAG knowledge combination", () => {
+  const result = retrieveKnowledge(
+    "客户要把多源文档持续加工成有来源、有版本、可复测的高质量RAG知识库。",
+    knowledgeBase,
+  );
+  const ids = result.hits.map((hit) => hit.entry.id);
+
+  assert.ok(ids.includes("LLM-M007"), ids.join(","));
+});
+
+test("retrieves the LLMOps expert digital employee combination", () => {
+  const result = retrieveKnowledge(
+    "客户要把专家岗位做成能使用企业知识和工具、可以人工接管的数字员工。",
+    knowledgeBase,
+  );
+  const ids = result.hits.map((hit) => hit.entry.id);
+
+  assert.ok(ids.includes("LLM-M001") || ids.includes("LLM-M009"), ids.join(","));
+});
+
+test("runs all 300 synthetic questions with auditable top-three results", () => {
   const tdhQuestions = readCsv("docs/knowledge/TDH_SYNTHETIC_TEST_QUESTIONS_100.csv");
   const combinationQuestions = readCsv(
     "docs/knowledge/CROSS_PRODUCT_SYNTHETIC_TEST_QUESTIONS_100.csv",
+  );
+  const llmopsQuestions = readCsv(
+    "docs/knowledge/LLMOPS_SYNTHETIC_TEST_QUESTIONS_100.csv",
   );
 
   let matched = 0;
@@ -99,7 +137,30 @@ test("runs all 200 synthetic questions with auditable top-three results", () => 
     }
   }
 
+  let llmopsAuditable = 0;
+  let llmopsMatched = 0;
+  let llmopsExpected = 0;
+  for (const row of llmopsQuestions) {
+    const hits = retrieveKnowledge(row["模拟销售提问"] ?? "", knowledgeBase).hits;
+    if (hits.length > 0 && hits.every((hit) => hit.entry.sources.length > 0)) {
+      llmopsAuditable += 1;
+    }
+    const expectedMapping = row["对应映射"] ?? "";
+    if (expectedMapping !== "安全边界（无产品映射）") {
+      llmopsExpected += 1;
+      if (hits.some((hit) => hit.entry.title === expectedMapping)) {
+        llmopsMatched += 1;
+      }
+    }
+  }
+
   assert.equal(tdhQuestions.length + combinationQuestions.length, 200);
   assert.equal(auditable, 200);
   assert.ok(matched >= 160, `expected at least 160 top-three mapping matches, received ${matched}`);
+  assert.equal(llmopsQuestions.length, 100);
+  assert.equal(llmopsAuditable, 100);
+  assert.ok(
+    llmopsMatched / llmopsExpected >= 0.9,
+    `expected at least 90% LLMOps mapping matches, received ${llmopsMatched}/${llmopsExpected}`,
+  );
 });

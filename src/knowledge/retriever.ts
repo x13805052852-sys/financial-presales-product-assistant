@@ -19,9 +19,35 @@ const conceptTerms: Record<string, string[]> = {
   lake: ["数据湖", "湖仓", "入湖", "hadoop", "cdh"],
   service: ["数据服务", "接口", "api", "对外提供"],
   intelligence: ["astro", "智能体", "智能治理", "自动识别", "智能助手"],
+  corpus: ["语料", "标注", "数据集", "问答对", "多模态", "清洗", "去重"],
+  modelOperations: ["模型", "微调", "训练", "评测", "推理", "token", "算力", "gpu"],
+  knowledgeEngineering: ["知识库", "知识工程", "rag", "检索", "索引", "业务本体"],
+  agentEngineering: ["agent", "数字员工", "vibe coding", "agentbox", "会话", "人工接管"],
+  aiGovernance: ["catalog", "discover", "权限", "审计", "workspace", "secret", "资产"],
 };
 
-const explicitProducts = ["TDH", "ArgoDB", "TDS", "Astro", "TDC", "LLMOps", "TKH", "Scope"];
+const explicitProducts = [
+  "TDH",
+  "ArgoDB",
+  "TDS",
+  "Astro",
+  "TDC",
+  "LLMOps",
+  "TKH",
+  "Scope",
+  "Corpus Studio",
+  "Model Foundry",
+  "TokenFactory",
+  "Knowledge Lodge",
+  "Agent Go",
+  "AI Infra",
+  "AgentBox",
+  "Agent Buddy",
+  "Agent Session Manager",
+  "KB Agent",
+  "Catalog",
+  "Discover",
+];
 
 function isConfirmed(entry: KnowledgeEntry): boolean {
   return entry.reviewStatus.includes("已确认") && !entry.reviewStatus.includes("待");

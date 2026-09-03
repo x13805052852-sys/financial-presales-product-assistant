@@ -36,9 +36,9 @@ function loadAliases(path: string): ProductAlias[] {
   }));
 }
 
-function loadCapabilityEntries(path: string): KnowledgeEntry[] {
+function loadCapabilityEntries(path: string, idPrefix: string): KnowledgeEntry[] {
   return readCsv(path).map((row, index) => ({
-    id: `TDH-M${String(index + 1).padStart(3, "0")}`,
+    id: `${idPrefix}${String(index + 1).padStart(3, "0")}`,
     kind: "capability",
     title: value(row, "标准功能"),
     customerNeed: value(row, "客户原始需求"),
@@ -80,13 +80,28 @@ function loadCombinationEntries(path: string): KnowledgeEntry[] {
 
 export function loadKnowledgeBase(repositoryRoot: string = process.cwd()): KnowledgeBase {
   const knowledgeDirectory = join(repositoryRoot, "docs", "knowledge");
-  const aliases = loadAliases(join(knowledgeDirectory, "TDH_PRODUCT_ALIASES.csv"));
-  const capabilityEntries = loadCapabilityEntries(
-    join(knowledgeDirectory, "TDH_CAPABILITY_PRODUCT_MAPPING.csv"),
-  );
-  const combinationEntries = loadCombinationEntries(
-    join(knowledgeDirectory, "CROSS_PRODUCT_COMBINATION_MAPPING.csv"),
-  );
+  const aliases = [
+    ...loadAliases(join(knowledgeDirectory, "TDH_PRODUCT_ALIASES.csv")),
+    ...loadAliases(join(knowledgeDirectory, "LLMOPS_PRODUCT_ALIASES.csv")),
+  ];
+  const capabilityEntries = [
+    ...loadCapabilityEntries(
+      join(knowledgeDirectory, "TDH_CAPABILITY_PRODUCT_MAPPING.csv"),
+      "TDH-M",
+    ),
+    ...loadCapabilityEntries(
+      join(knowledgeDirectory, "LLMOPS_CAPABILITY_PRODUCT_MAPPING.csv"),
+      "LLM-C",
+    ),
+  ];
+  const combinationEntries = [
+    ...loadCombinationEntries(
+      join(knowledgeDirectory, "CROSS_PRODUCT_COMBINATION_MAPPING.csv"),
+    ),
+    ...loadCombinationEntries(
+      join(knowledgeDirectory, "LLMOPS_COMBINATION_MAPPING.csv"),
+    ),
+  ];
 
   return {
     aliases,
