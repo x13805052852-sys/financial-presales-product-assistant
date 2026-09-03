@@ -23,6 +23,7 @@
 4. 建立 24 条别名、34 条功能映射和 15 条组合映射。
 5. 生成 100 条单轮销售模拟问题和 100 条双轮上下文测试。
 6. 将 LLMOps 产品域、组件、能力和组合接入现有知识加载器、检索器和上下文识别。
+7. 生成 LLMOps 产品专家审核表，集中呈现 34 条功能映射和 15 条组合映射，带审核下拉项、可对客标记和自动进度汇总。
 7. 明确 Corpus Studio、Model Foundry、Knowledge Lodge、Agent Go、AI Infra 五个产品域，以及 TokenFactory、AgentBox、Agent Buddy、Agent Session Manager、KB Agent、Catalog 和 Discover 的归属。
 
 ## 当前测试覆盖
@@ -52,7 +53,7 @@
 
 ## 建议下一步
 
-先把 [LLMOPS_CAPABILITY_PRODUCT_MAPPING.csv](knowledge/LLMOPS_CAPABILITY_PRODUCT_MAPPING.csv) 和 [LLMOPS_COMBINATION_MAPPING.csv](knowledge/LLMOPS_COMBINATION_MAPPING.csv) 交给产品专家审核。审核期间可同步在企业微信测试群完成 20 轮真实问答；两边结果合并到错题清单后，再冻结候选版本。
+将已生成的 `outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/LLMOps_产品专家审核表.xlsx` 交给产品专家填写。审核期间可同步在企业微信测试群完成 20 轮真实问答；两边结果合并到错题清单后，再冻结候选版本。
 
 ## 本次 Git 里程碑
 

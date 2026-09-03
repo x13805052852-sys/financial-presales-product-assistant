@@ -59,6 +59,7 @@
 - [LLMOps 场景—组合映射](docs/knowledge/LLMOPS_COMBINATION_MAPPING.csv)
 - [LLMOps 100 条单轮模拟销售问题](docs/knowledge/LLMOPS_SYNTHETIC_TEST_QUESTIONS_100.csv)
 - [LLMOps 100 组双轮上下文测试](docs/knowledge/LLMOPS_CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv)
+- [LLMOps 产品专家审核表](outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/LLMOps_产品专家审核表.xlsx)
 - [跨产品组合映射](docs/knowledge/CROSS_PRODUCT_COMBINATION_MAPPING.csv)
 - [第二批 100 条跨产品模拟销售问题](docs/knowledge/CROSS_PRODUCT_SYNTHETIC_TEST_QUESTIONS_100.csv)
 - [100 组双轮上下文测试](docs/knowledge/CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv)
