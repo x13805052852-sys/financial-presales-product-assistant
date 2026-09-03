@@ -42,7 +42,7 @@
 - [x] D3-06 实现短上下文追问｜证据：同群同用户、仅保留上一轮、30 分钟有效；提交 `3f52cb6`、`c8c2c57`、`5f9eb07`
 - [x] D3-07 实现超时、重试和错误提示｜证据：`src/model/openai-compatible-client.ts`、`src/wecom/message-handler.ts`
 - [x] D3-08 配置凭证安全和脱敏日志｜证据：`.env.example`、`src/wecom/safe-logger.ts`、`src/app/audit-logger.ts`、仓库密钥扫描测试
-- [ ] D3-09 完成 20 轮群内问答｜证据：
+- [ ] D3-09 完成 20 轮群内问答｜证据：测试脚本与验收记录模板已准备：`docs/LLMOPS_WECOM_UAT_20.md`；仍待使用轮换后的新凭证执行真实群测
 - [ ] D3-10 完成内部演示和问题登记｜证据：
 
 ## 第 4 天

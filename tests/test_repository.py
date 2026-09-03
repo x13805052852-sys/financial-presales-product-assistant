@@ -20,6 +20,7 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/TDH_SOURCE_ASSESSMENT.md",
             "docs/LLMOPS_SOURCE_ASSESSMENT.md",
             "docs/LLMOPS_KNOWLEDGE_TODO.md",
+            "docs/LLMOPS_WECOM_UAT_20.md",
             "docs/PROGRESS_STATUS_2026-09-03.md",
             "docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md",
             "docs/TDH_SOURCE_INVENTORY.csv",
@@ -115,6 +116,14 @@ class RepositoryQualityTests(unittest.TestCase):
         task_ids = re.findall(r"^\| (D[1-5]-\d{2}) \|", plan, flags=re.MULTILINE)
         self.assertEqual(53, len(task_ids))
         self.assertEqual(53, len(set(task_ids)))
+
+    def test_llmops_wecom_uat_has_20_unique_rounds(self):
+        uat = (ROOT / "docs/LLMOPS_WECOM_UAT_20.md").read_text(encoding="utf-8")
+        rounds = re.findall(r"^\| (\d{1,2}) \|", uat, flags=re.MULTILINE)
+        self.assertEqual([str(number) for number in range(1, 21)], rounds)
+        self.assertIn("不低于 90%", uat)
+        self.assertIn("同群、同用户、间隔小于 30 分钟", uat)
+        self.assertIn("安全拒绝", uat)
 
     def test_tdh_source_inventory_is_complete_and_classified(self):
         inventory = ROOT / "docs/TDH_SOURCE_INVENTORY.csv"
