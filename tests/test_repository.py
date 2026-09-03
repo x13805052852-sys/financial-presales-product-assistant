@@ -18,8 +18,10 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/ACCEPTANCE_CRITERIA.md",
             "docs/DATA_PREPARATION_GUIDE.md",
             "docs/TDH_SOURCE_ASSESSMENT.md",
+            "docs/LLMOPS_SOURCE_ASSESSMENT.md",
             "docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md",
             "docs/TDH_SOURCE_INVENTORY.csv",
+            "docs/LLMOPS_SOURCE_INVENTORY.csv",
             "docs/knowledge/TDH_PRODUCT_ALIASES.csv",
             "docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv",
             "docs/knowledge/TDH_SYNTHETIC_TEST_QUESTIONS_100.csv",
@@ -30,12 +32,15 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md",
             "docs/superpowers/specs/2026-09-01-cross-product-combination-question-set-design.md",
             "docs/superpowers/specs/2026-09-01-concise-answer-framework-design.md",
+            "docs/superpowers/specs/2026-09-03-llmops-knowledge-preparation-design.md",
+            "docs/superpowers/plans/2026-09-03-llmops-knowledge-preparation-implementation-plan.md",
             "docs/templates/source_manifest.csv",
             "docs/templates/capability_product_mapping.csv",
             "docs/templates/acceptance_questions.csv",
             ".githooks/pre-push",
             "scripts/setup_git_hooks.sh",
             "scripts/build_cross_product_question_set.mjs",
+            "scripts/build_llmops_inventory.py",
         ]
         missing = [path for path in required if not (ROOT / path).is_file()]
         self.assertEqual([], missing, f"Missing required files: {missing}")
@@ -131,6 +136,37 @@ class RepositoryQualityTests(unittest.TestCase):
         for row in rows:
             self.assertRegex(row["sha256"], r"^[0-9a-f]{64}$")
             self.assertEqual("ok", row["extraction_status"])
+
+    def test_llmops_source_inventory_is_complete_and_classified(self):
+        inventory = ROOT / "docs/LLMOPS_SOURCE_INVENTORY.csv"
+        with inventory.open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertEqual(36, len(rows))
+        self.assertEqual(36, len({row["relative_path"] for row in rows}))
+        self.assertEqual(
+            28,
+            sum(row["extension"] != "[no-extension]" for row in rows),
+        )
+        expected_counts = {
+            "A-首版核心入库": 5,
+            "B-首版条件入库": 4,
+            "C-历史版本库": 16,
+            "C-测试证据库": 2,
+            "C-安全证据库": 1,
+            "E-排除首版": 8,
+        }
+        actual_counts = {
+            category: sum(row["classification"] == category for row in rows)
+            for category in expected_counts
+        }
+        self.assertEqual(expected_counts, actual_counts)
+        for number, row in enumerate(rows, start=2):
+            self.assertRegex(row["sha256"], r"^[0-9a-f]{64}$")
+            self.assertTrue(row["version_or_period"], f"Missing version at row {number}")
+            self.assertTrue(row["recommended_use"], f"Missing use at row {number}")
+            self.assertTrue(row["risk_or_action"], f"Missing risk at row {number}")
+            self.assertTrue(row["extraction_status"], f"Missing status at row {number}")
 
     def test_tdh_product_aliases_are_unique_and_auditable(self):
         path = ROOT / "docs/knowledge/TDH_PRODUCT_ALIASES.csv"
