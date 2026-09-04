@@ -1,6 +1,8 @@
 import csv
 import re
 import unittest
+import zipfile
+from xml.etree import ElementTree
 from pathlib import Path
 
 
@@ -21,6 +23,7 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/LLMOPS_SOURCE_ASSESSMENT.md",
             "docs/LLMOPS_KNOWLEDGE_TODO.md",
             "docs/LLMOPS_WECOM_UAT_20.md",
+            "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/LLMOps_售前问题测试集.xlsx",
             "docs/PROGRESS_STATUS_2026-09-03.md",
             "docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md",
             "docs/TDH_SOURCE_INVENTORY.csv",
@@ -124,6 +127,36 @@ class RepositoryQualityTests(unittest.TestCase):
         self.assertIn("不低于 90%", uat)
         self.assertIn("同群、同用户、间隔小于 30 分钟", uat)
         self.assertIn("安全拒绝", uat)
+
+    def test_llmops_question_workbook_has_expected_sheets_and_ranges(self):
+        path = ROOT / "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/LLMOps_售前问题测试集.xlsx"
+        namespace = {"x": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+        with zipfile.ZipFile(path) as workbook:
+            root = ElementTree.fromstring(workbook.read("xl/workbook.xml"))
+            sheets = root.find("x:sheets", namespace)
+            names = [sheet.attrib["name"] for sheet in sheets]
+            self.assertEqual(
+                [
+                    "100条单轮问题",
+                    "100组双轮上下文",
+                    "20轮企微验收",
+                    "LLMOps组合映射",
+                    "分类统计",
+                    "使用说明",
+                ],
+                names,
+            )
+            expected_shapes = [(101, "S"), (101, "P"), (21, "M"), (16, "O"), (20, "E"), (13, "B")]
+            actual_shapes = []
+            for number, (_, last_column) in enumerate(expected_shapes, start=1):
+                sheet_xml = workbook.read(f"xl/worksheets/sheet{number}.xml")
+                sheet_root = ElementTree.fromstring(sheet_xml)
+                rows = sheet_root.findall("x:sheetData/x:row", namespace)
+                cells = sheet_root.findall("x:sheetData/x:row/x:c", namespace)
+                self.assertIn(f"{last_column}1", {cell.attrib["r"] for cell in cells})
+                actual_shapes.append((max(int(row.attrib["r"]) for row in rows), last_column))
+            self.assertEqual(expected_shapes, actual_shapes)
+            self.assertIn(b"dataValidations", workbook.read("xl/worksheets/sheet3.xml"))
 
     def test_tdh_source_inventory_is_complete_and_classified(self):
         inventory = ROOT / "docs/TDH_SOURCE_INVENTORY.csv"
