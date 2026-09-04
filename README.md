@@ -40,6 +40,7 @@
 - [企业微信单轮上下文实施计划](docs/superpowers/plans/2026-09-02-one-turn-context-resolution-implementation-plan.md)
 - [LLMOps 知识准备设计](docs/superpowers/specs/2026-09-03-llmops-knowledge-preparation-design.md)
 - [LLMOps 知识准备实施计划](docs/superpowers/plans/2026-09-03-llmops-knowledge-preparation-implementation-plan.md)
+- [LLMOps 售前问题测试集 Excel 设计](docs/superpowers/specs/2026-09-04-llmops-question-workbook-design.md)
 - [五天内部执行计划](docs/PROJECT_EXECUTION_PLAN.md)
 - [上线验收标准](docs/ACCEPTANCE_CRITERIA.md)
 - [资料准备说明](docs/DATA_PREPARATION_GUIDE.md)
