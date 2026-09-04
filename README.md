@@ -30,6 +30,15 @@
 ## 文档导航
 
 - [当前项目进度（2026-09-04）](docs/PROGRESS_STATUS_2026-09-04.md)
+- [整合交付总览](docs/delivery/00_交付总览.md)
+- [整合交付校验报告](docs/delivery/00_交付校验报告.md)
+- [TDH 知识库说明](docs/delivery/TDH_知识库说明.md)
+- [Ops 知识库说明](docs/delivery/Ops_知识库说明.md)
+- [无涯知识库说明](docs/delivery/无涯_知识库说明.md)
+- [金融售前助手交付索引 Excel](outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/金融售前助手_交付索引.xlsx)
+- [TDH 知识库总表 Excel](outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/TDH_知识库总表.xlsx)
+- [整合交付包设计](docs/superpowers/specs/2026-09-04-integrated-delivery-package-design.md)
+- [整合交付包实施计划](docs/superpowers/plans/2026-09-04-integrated-delivery-package-implementation-plan.md)
 - [产品设计](docs/superpowers/specs/2026-08-31-financial-presales-product-assistant-design.md)
 - [TDH 100 条模拟销售问题测试集设计](docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md)
 - [跨产品组合映射与第二批 100 条模拟问题设计](docs/superpowers/specs/2026-09-01-cross-product-combination-question-set-design.md)

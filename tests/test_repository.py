@@ -28,6 +28,11 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/WUYA_SOURCE_INVENTORY.csv",
             "docs/WUYA_KNOWLEDGE_TODO.md",
             "docs/WUYA_WECOM_UAT_20.md",
+            "docs/delivery/00_交付总览.md",
+            "docs/delivery/00_交付校验报告.md",
+            "docs/delivery/TDH_知识库说明.md",
+            "docs/delivery/Ops_知识库说明.md",
+            "docs/delivery/无涯_知识库说明.md",
             "docs/knowledge/WUYA_PRODUCT_ALIASES.csv",
             "docs/knowledge/WUYA_CAPABILITY_PRODUCT_MAPPING.csv",
             "docs/knowledge/WUYA_COMBINATION_MAPPING.csv",
@@ -35,6 +40,8 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/knowledge/WUYA_CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv",
             "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/无涯_售前问题测试集.xlsx",
             "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/无涯_产品专家审核表.xlsx",
+            "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/金融售前助手_交付索引.xlsx",
+            "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/TDH_知识库总表.xlsx",
             "docs/PROGRESS_STATUS_2026-09-03.md",
             "docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md",
             "docs/TDH_SOURCE_INVENTORY.csv",
@@ -55,7 +62,9 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/superpowers/specs/2026-09-01-cross-product-combination-question-set-design.md",
             "docs/superpowers/specs/2026-09-01-concise-answer-framework-design.md",
             "docs/superpowers/specs/2026-09-03-llmops-knowledge-preparation-design.md",
+            "docs/superpowers/specs/2026-09-04-integrated-delivery-package-design.md",
             "docs/superpowers/plans/2026-09-03-llmops-knowledge-preparation-implementation-plan.md",
+            "docs/superpowers/plans/2026-09-04-integrated-delivery-package-implementation-plan.md",
             "docs/templates/source_manifest.csv",
             "docs/templates/capability_product_mapping.csv",
             "docs/templates/acceptance_questions.csv",
@@ -66,9 +75,27 @@ class RepositoryQualityTests(unittest.TestCase):
             "scripts/build_llmops_knowledge.py",
             "scripts/build_wuya_inventory.py",
             "scripts/build_wuya_knowledge.py",
+            "scripts/build_integrated_delivery_workbooks.mjs",
+            "scripts/verify_integrated_delivery.mjs",
         ]
         missing = [path for path in required if not (ROOT / path).is_file()]
         self.assertEqual([], missing, f"Missing required files: {missing}")
+
+        workbook_sheets = {
+            "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/金融售前助手_交付索引.xlsx": [
+                "交付总览", "文件索引", "产品总览", "测试汇总", "使用说明"
+            ],
+            "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/TDH_知识库总表.xlsx": [
+                "产品总览", "产品别名", "TDH功能映射", "配套组合映射", "TDH单轮问题",
+                "配套单轮问题", "双轮上下文", "资料清单", "使用说明"
+            ],
+        }
+        namespace = {"x": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+        for relative_path, expected_sheets in workbook_sheets.items():
+            with self.subTest(workbook=relative_path), zipfile.ZipFile(ROOT / relative_path) as workbook:
+                root = ElementTree.fromstring(workbook.read("xl/workbook.xml"))
+                sheets = root.find("x:sheets", namespace)
+                self.assertEqual(expected_sheets, [sheet.attrib["name"] for sheet in sheets])
 
     def test_csv_template_headers(self):
         expected_headers = {
