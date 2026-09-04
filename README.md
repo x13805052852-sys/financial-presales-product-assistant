@@ -29,7 +29,7 @@
 
 ## 文档导航
 
-- [当前项目进度（2026-09-03）](docs/PROGRESS_STATUS_2026-09-03.md)
+- [当前项目进度（2026-09-04）](docs/PROGRESS_STATUS_2026-09-04.md)
 - [产品设计](docs/superpowers/specs/2026-08-31-financial-presales-product-assistant-design.md)
 - [TDH 100 条模拟销售问题测试集设计](docs/superpowers/specs/2026-08-31-tdh-synthetic-sales-questions-design.md)
 - [跨产品组合映射与第二批 100 条模拟问题设计](docs/superpowers/specs/2026-09-01-cross-product-combination-question-set-design.md)
@@ -63,6 +63,17 @@
 - [LLMOps 售前问题测试集 Excel](outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/LLMOps_售前问题测试集.xlsx)
 - [LLMOps 产品专家审核表](outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/LLMOps_产品专家审核表.xlsx)
 - [LLMOps 企业微信 20 轮真实问答验收表](docs/LLMOPS_WECOM_UAT_20.md)
+- [无涯资料筛选报告](docs/WUYA_SOURCE_ASSESSMENT.md)
+- [无涯逐文件资料清单](docs/WUYA_SOURCE_INVENTORY.csv)
+- [无涯知识准备 TODO](docs/WUYA_KNOWLEDGE_TODO.md)
+- [无涯产品及组件别名](docs/knowledge/WUYA_PRODUCT_ALIASES.csv)
+- [无涯功能—产品映射](docs/knowledge/WUYA_CAPABILITY_PRODUCT_MAPPING.csv)
+- [无涯场景—组合映射](docs/knowledge/WUYA_COMBINATION_MAPPING.csv)
+- [无涯 100 条单轮模拟销售问题](docs/knowledge/WUYA_SYNTHETIC_TEST_QUESTIONS_100.csv)
+- [无涯 100 组双轮上下文测试](docs/knowledge/WUYA_CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv)
+- [无涯售前问题测试集 Excel](outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/无涯_售前问题测试集.xlsx)
+- [无涯产品专家审核表](outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/无涯_产品专家审核表.xlsx)
+- [无涯企业微信 20 轮真实问答验收表](docs/WUYA_WECOM_UAT_20.md)
 - [跨产品组合映射](docs/knowledge/CROSS_PRODUCT_COMBINATION_MAPPING.csv)
 - [第二批 100 条跨产品模拟销售问题](docs/knowledge/CROSS_PRODUCT_SYNTHETIC_TEST_QUESTIONS_100.csv)
 - [100 组双轮上下文测试](docs/knowledge/CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv)
@@ -89,6 +100,8 @@
 跨产品组合映射覆盖 TDH、ArgoDB、TDC、TDS 和 Astro，同样处于“待产品专家确认”状态。Astro 资料中的智能体数量和个别名称存在版本口径差异，机器人必须按目标版本提示确认，不能硬性回答。
 
 LLMOps 首版已覆盖 Corpus Studio、Model Foundry、Knowledge Lodge、Agent Go、AI Infra 五个产品域及主要组件。当前映射仍处于内部实验状态；旧版本、规划能力、测试数字和竞品材料不会作为默认对客口径。
+
+无涯首版已分别覆盖 TKH/无涯·问知、无涯·问数/Logits、Co-Worker/XClaw，并保留与 Astro、TDS、LLMOps、TDC AI 的组合边界。全部映射仍待产品专家确认，当前自动测试结果只用于内部一致性验证。
 
 ## 自动测试
 

@@ -28,7 +28,7 @@ test("loads aliases and both kinds of auditable knowledge", () => {
   assert.ok(knowledgeBase.entries.some((entry) => entry.kind === "capability"));
   assert.equal(
     knowledgeBase.entries.filter((entry) => entry.kind === "combination").length,
-    55,
+    70,
   );
   assert.ok(knowledgeBase.entries.every((entry) => entry.id && entry.sources.length > 0));
 });
@@ -105,13 +105,40 @@ test("retrieves the LLMOps expert digital employee combination", () => {
   assert.ok(ids.includes("LLM-M001") || ids.includes("LLM-M009"), ids.join(","));
 });
 
-test("runs all 300 synthetic questions with auditable top-three results", () => {
+test("retrieves WUYA knowledge question answering", () => {
+  const result = retrieveKnowledge(
+    "客户要用内部文档建设能引用原文的企业知识问答，应该选择什么？",
+    knowledgeBase,
+  );
+  assert.ok(result.hits.some((hit) => hit.entry.id === "WUYA-M001"));
+});
+
+test("retrieves WUYA governed natural-language data analysis", () => {
+  const result = retrieveKnowledge(
+    "客户已有TDS的数据指标和治理成果，希望业务人员自然语言问数并生成图表。",
+    knowledgeBase,
+  );
+  assert.ok(result.hits.some((hit) => hit.entry.id === "WUYA-M005"));
+});
+
+test("retrieves Co-Worker with WUYA knowledge for task execution", () => {
+  const result = retrieveKnowledge(
+    "客户既要查企业知识，又要进入ERP和OA完成催办流程。",
+    knowledgeBase,
+  );
+  assert.ok(result.hits.some((hit) => hit.entry.id === "WUYA-M007"));
+});
+
+test("runs all 400 synthetic questions with auditable top-three results", () => {
   const tdhQuestions = readCsv("docs/knowledge/TDH_SYNTHETIC_TEST_QUESTIONS_100.csv");
   const combinationQuestions = readCsv(
     "docs/knowledge/CROSS_PRODUCT_SYNTHETIC_TEST_QUESTIONS_100.csv",
   );
   const llmopsQuestions = readCsv(
     "docs/knowledge/LLMOPS_SYNTHETIC_TEST_QUESTIONS_100.csv",
+  );
+  const wuyaQuestions = readCsv(
+    "docs/knowledge/WUYA_SYNTHETIC_TEST_QUESTIONS_100.csv",
   );
 
   let matched = 0;
@@ -162,5 +189,28 @@ test("runs all 300 synthetic questions with auditable top-three results", () => 
   assert.ok(
     llmopsMatched / llmopsExpected >= 0.9,
     `expected at least 90% LLMOps mapping matches, received ${llmopsMatched}/${llmopsExpected}`,
+  );
+
+  let wuyaAuditable = 0;
+  let wuyaMatched = 0;
+  let wuyaExpected = 0;
+  for (const row of wuyaQuestions) {
+    const hits = retrieveKnowledge(row["模拟销售提问"] ?? "", knowledgeBase).hits;
+    if (hits.length > 0 && hits.every((hit) => hit.entry.sources.length > 0)) {
+      wuyaAuditable += 1;
+    }
+    const expectedMapping = row["对应映射"] ?? "";
+    if (expectedMapping !== "安全边界（无产品映射）") {
+      wuyaExpected += 1;
+      if (hits.some((hit) => hit.entry.title === expectedMapping)) {
+        wuyaMatched += 1;
+      }
+    }
+  }
+  assert.equal(wuyaQuestions.length, 100);
+  assert.equal(wuyaAuditable, 100);
+  assert.ok(
+    wuyaMatched / wuyaExpected >= 0.9,
+    `expected at least 90% WUYA mapping matches, received ${wuyaMatched}/${wuyaExpected}`,
   );
 });

@@ -83,6 +83,7 @@ export function loadKnowledgeBase(repositoryRoot: string = process.cwd()): Knowl
   const aliases = [
     ...loadAliases(join(knowledgeDirectory, "TDH_PRODUCT_ALIASES.csv")),
     ...loadAliases(join(knowledgeDirectory, "LLMOPS_PRODUCT_ALIASES.csv")),
+    ...loadAliases(join(knowledgeDirectory, "WUYA_PRODUCT_ALIASES.csv")),
   ];
   const capabilityEntries = [
     ...loadCapabilityEntries(
@@ -93,6 +94,10 @@ export function loadKnowledgeBase(repositoryRoot: string = process.cwd()): Knowl
       join(knowledgeDirectory, "LLMOPS_CAPABILITY_PRODUCT_MAPPING.csv"),
       "LLM-C",
     ),
+    ...loadCapabilityEntries(
+      join(knowledgeDirectory, "WUYA_CAPABILITY_PRODUCT_MAPPING.csv"),
+      "WUYA-C",
+    ),
   ];
   const combinationEntries = [
     ...loadCombinationEntries(
@@ -100,6 +105,9 @@ export function loadKnowledgeBase(repositoryRoot: string = process.cwd()): Knowl
     ),
     ...loadCombinationEntries(
       join(knowledgeDirectory, "LLMOPS_COMBINATION_MAPPING.csv"),
+    ),
+    ...loadCombinationEntries(
+      join(knowledgeDirectory, "WUYA_COMBINATION_MAPPING.csv"),
     ),
   ];
 

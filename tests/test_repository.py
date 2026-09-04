@@ -24,6 +24,17 @@ class RepositoryQualityTests(unittest.TestCase):
             "docs/LLMOPS_KNOWLEDGE_TODO.md",
             "docs/LLMOPS_WECOM_UAT_20.md",
             "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/LLMOps_售前问题测试集.xlsx",
+            "docs/WUYA_SOURCE_ASSESSMENT.md",
+            "docs/WUYA_SOURCE_INVENTORY.csv",
+            "docs/WUYA_KNOWLEDGE_TODO.md",
+            "docs/WUYA_WECOM_UAT_20.md",
+            "docs/knowledge/WUYA_PRODUCT_ALIASES.csv",
+            "docs/knowledge/WUYA_CAPABILITY_PRODUCT_MAPPING.csv",
+            "docs/knowledge/WUYA_COMBINATION_MAPPING.csv",
+            "docs/knowledge/WUYA_SYNTHETIC_TEST_QUESTIONS_100.csv",
+            "docs/knowledge/WUYA_CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv",
+            "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/无涯_售前问题测试集.xlsx",
+            "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/无涯_产品专家审核表.xlsx",
             "docs/PROGRESS_STATUS_2026-09-03.md",
             "docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md",
             "docs/TDH_SOURCE_INVENTORY.csv",
@@ -53,6 +64,8 @@ class RepositoryQualityTests(unittest.TestCase):
             "scripts/build_cross_product_question_set.mjs",
             "scripts/build_llmops_inventory.py",
             "scripts/build_llmops_knowledge.py",
+            "scripts/build_wuya_inventory.py",
+            "scripts/build_wuya_knowledge.py",
         ]
         missing = [path for path in required if not (ROOT / path).is_file()]
         self.assertEqual([], missing, f"Missing required files: {missing}")
@@ -169,6 +182,36 @@ class RepositoryQualityTests(unittest.TestCase):
             self.assertEqual(expected_shapes, actual_shapes)
             self.assertIn(b"dataValidations", workbook.read("xl/worksheets/sheet3.xml"))
 
+    def test_wuya_question_workbook_has_expected_sheets_and_ranges(self):
+        path = ROOT / "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/无涯_售前问题测试集.xlsx"
+        namespace = {"x": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+        with zipfile.ZipFile(path) as workbook:
+            root = ElementTree.fromstring(workbook.read("xl/workbook.xml"))
+            sheets = root.find("x:sheets", namespace)
+            self.assertEqual(
+                ["100条单轮问题", "100组双轮上下文", "20轮企微验收", "无涯功能映射", "无涯组合映射", "产品及组件别名", "分类统计", "使用说明"],
+                [sheet.attrib["name"] for sheet in sheets],
+            )
+            expected_shapes = [(101, "X"), (101, "X"), (21, "R"), (35, "J"), (16, "O"), (23, "I"), (30, "H"), (20, "B")]
+            for number, (last_row, last_column) in enumerate(expected_shapes, start=1):
+                sheet_root = ElementTree.fromstring(workbook.read(f"xl/worksheets/sheet{number}.xml"))
+                rows = sheet_root.findall("x:sheetData/x:row", namespace)
+                cells = sheet_root.findall("x:sheetData/x:row/x:c", namespace)
+                self.assertEqual(last_row, max(int(row.attrib["r"]) for row in rows))
+                self.assertIn(f"{last_column}1", {cell.attrib["r"] for cell in cells})
+            self.assertIn(b"dataValidations", workbook.read("xl/worksheets/sheet3.xml"))
+
+    def test_wuya_review_workbook_has_expected_sheets(self):
+        path = ROOT / "outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/无涯_产品专家审核表.xlsx"
+        namespace = {"x": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+        with zipfile.ZipFile(path) as workbook:
+            root = ElementTree.fromstring(workbook.read("xl/workbook.xml"))
+            sheets = root.find("x:sheets", namespace)
+            self.assertEqual(
+                ["审核汇总", "审核说明", "功能映射审核", "组合映射审核"],
+                [sheet.attrib["name"] for sheet in sheets],
+            )
+
     def test_tdh_source_inventory_is_complete_and_classified(self):
         inventory = ROOT / "docs/TDH_SOURCE_INVENTORY.csv"
         with inventory.open(encoding="utf-8-sig", newline="") as handle:
@@ -228,6 +271,85 @@ class RepositoryQualityTests(unittest.TestCase):
             self.assertTrue(row["recommended_use"], f"Missing use at row {number}")
             self.assertTrue(row["risk_or_action"], f"Missing risk at row {number}")
             self.assertTrue(row["extraction_status"], f"Missing status at row {number}")
+
+    def test_wuya_source_inventory_is_complete_and_classified(self):
+        with (ROOT / "docs/WUYA_SOURCE_INVENTORY.csv").open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertEqual(89, len(rows))
+        self.assertEqual(89, len({row["relative_path"] for row in rows}))
+        expected_counts = {
+            "A-首版核心入库": 9,
+            "B-首版条件入库": 25,
+            "C-历史或补充资料": 6,
+            "C-测试证据库": 4,
+            "C-认证证据库": 1,
+            "D-完全重复副本": 13,
+            "E-敏感演示包": 3,
+            "E-排除首版": 28,
+        }
+        self.assertEqual(
+            expected_counts,
+            {category: sum(row["classification"] == category for row in rows) for category in expected_counts},
+        )
+        for number, row in enumerate(rows, start=2):
+            self.assertRegex(row["sha256"], r"^[0-9a-f]{64}$")
+            self.assertTrue(row["recommended_use"], f"Missing use at row {number}")
+            self.assertTrue(row["risk_or_action"], f"Missing risk at row {number}")
+            self.assertTrue(row["extraction_status"], f"Missing status at row {number}")
+
+    def test_wuya_structured_knowledge_is_complete_and_auditable(self):
+        with (ROOT / "docs/knowledge/WUYA_PRODUCT_ALIASES.csv").open(encoding="utf-8-sig", newline="") as handle:
+            aliases = list(csv.DictReader(handle))
+        with (ROOT / "docs/knowledge/WUYA_CAPABILITY_PRODUCT_MAPPING.csv").open(encoding="utf-8-sig", newline="") as handle:
+            capabilities = list(csv.DictReader(handle))
+        with (ROOT / "docs/knowledge/WUYA_COMBINATION_MAPPING.csv").open(encoding="utf-8-sig", newline="") as handle:
+            combinations = list(csv.DictReader(handle))
+        self.assertEqual(22, len(aliases))
+        self.assertEqual(22, len({row["标准名称"] for row in aliases}))
+        self.assertEqual(34, len(capabilities))
+        self.assertEqual(34, len({row["标准功能"] for row in capabilities}))
+        self.assertEqual(15, len(combinations))
+        self.assertEqual([f"WUYA-M{number:03d}" for number in range(1, 16)], [row["映射编号"] for row in combinations])
+        for row in aliases:
+            self.assertIn("#", row["资料来源"])
+            self.assertEqual("待产品专家确认", row["确认状态"])
+        for row in capabilities:
+            self.assertIn("#", row["资料来源"])
+            self.assertEqual("待产品专家确认", row["确认人"])
+        for row in combinations:
+            self.assertIn("#", row["资料来源"])
+            self.assertIn("：", row["产品分工"])
+            self.assertIn(row["资料冲突"], {"有", "无"})
+            self.assertIn(row["推荐置信度"], {"高", "中", "低"})
+            self.assertEqual("待产品专家确认", row["审核状态"])
+
+    def test_wuya_question_sets_are_balanced_and_cover_every_mapping(self):
+        with (ROOT / "docs/knowledge/WUYA_SYNTHETIC_TEST_QUESTIONS_100.csv").open(encoding="utf-8-sig", newline="") as handle:
+            questions = list(csv.DictReader(handle))
+        with (ROOT / "docs/knowledge/WUYA_CONTEXT_TWO_TURN_TEST_QUESTIONS_100.csv").open(encoding="utf-8-sig", newline="") as handle:
+            context = list(csv.DictReader(handle))
+        with (ROOT / "docs/knowledge/WUYA_CAPABILITY_PRODUCT_MAPPING.csv").open(encoding="utf-8-sig", newline="") as handle:
+            known = {row["标准功能"] for row in csv.DictReader(handle)}
+        self.assertEqual(100, len(questions))
+        self.assertEqual([f"WUYA-Q{number:03d}" for number in range(1, 101)], [row["编号"] for row in questions])
+        self.assertEqual(100, len({row["模拟销售提问"] for row in questions}))
+        self.assertEqual(known, {row["对应映射"] for row in questions if row["对应映射"] != "安全边界（无产品映射）"})
+        self.assertEqual(100, len(context))
+        self.assertEqual([f"WUYA-CTX-Q{number:03d}" for number in range(1, 101)], [row["编号"] for row in context])
+        self.assertEqual(50, sum(row["期望是否继承"] == "是" for row in context))
+        self.assertEqual(50, sum(row["期望是否继承"] == "否" for row in context))
+        self.assertEqual(
+            {"正常追问": 40, "同人换题": 30, "跨用户": 15, "边界与引用": 15},
+            {category: sum(row["类别"] == category for row in context) for category in ["正常追问", "同人换题", "跨用户", "边界与引用"]},
+        )
+
+    def test_wuya_wecom_uat_has_20_unique_rounds(self):
+        uat = (ROOT / "docs/WUYA_WECOM_UAT_20.md").read_text(encoding="utf-8")
+        rounds = re.findall(r"^\| (\d{1,2}) \|", uat, flags=re.MULTILINE)
+        self.assertEqual([str(number) for number in range(1, 21)], rounds)
+        self.assertIn("不低于 90%", uat)
+        self.assertIn("同群、同用户、30 分钟内", uat)
+        self.assertIn("安全拒绝", uat)
 
     def test_llmops_product_aliases_are_unique_and_auditable(self):
         path = ROOT / "docs/knowledge/LLMOPS_PRODUCT_ALIASES.csv"

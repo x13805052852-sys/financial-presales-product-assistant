@@ -2,18 +2,18 @@
 
 填写规则：任务完成后将 `[ ]` 改为 `[x]`，并在该行末尾补充 Pull Request、提交号、测试报告或验收记录。没有证据不得勾选。
 
-当前进度（2026-09-03）：**33/53 项完成，完成率 62.3%**。LLMOps 技术准备已经完成，但产品专家确认和真实群测仍未完成。详细状态与下一步见 `docs/PROGRESS_STATUS_2026-09-03.md`。
+当前进度（2026-09-04）：**33/53 项完成，完成率 62.3%**。TDH、跨产品、LLMOps 和无涯技术准备已经完成，但产品专家确认和真实群测仍未完成。详细状态与下一步见 `docs/PROGRESS_STATUS_2026-09-04.md`。
 
 ## 第 1 天
 
 - [ ] D1-01 召开 30 分钟启动会｜证据：
-- [x] D1-02 确定首批 5～8 组产品线｜证据：`README.md`、`docs/knowledge/CROSS_PRODUCT_COMBINATION_MAPPING.csv`、`docs/knowledge/LLMOPS_COMBINATION_MAPPING.csv`（首版实际知识覆盖 TDH、ArgoDB、TDC、TDS、Astro、LLMOps）
+- [x] D1-02 确定首批 5～8 组产品线｜证据：`README.md`、`docs/knowledge/CROSS_PRODUCT_COMBINATION_MAPPING.csv`、`docs/knowledge/LLMOPS_COMBINATION_MAPPING.csv`、`docs/knowledge/WUYA_COMBINATION_MAPPING.csv`（首版覆盖 TDH、ArgoDB、TDC、TDS、Astro、LLMOps、TKH/无涯·问知、无涯·问数、Co-Worker）
 - [ ] D1-03 收集产品方案总表原始 Excel｜证据：
-- [x] D1-04 建立资料清单｜证据：`docs/TDH_SOURCE_INVENTORY.csv`、`docs/LLMOPS_SOURCE_INVENTORY.csv`
-- [x] D1-05 标记重复、过期和冲突资料｜证据：`docs/TDH_SOURCE_ASSESSMENT.md`、`docs/LLMOPS_SOURCE_ASSESSMENT.md`
-- [x] D1-06 建立产品标准名及别名表｜证据：`CONTEXT.md`、`docs/knowledge/TDH_PRODUCT_ALIASES.csv`、`docs/knowledge/LLMOPS_PRODUCT_ALIASES.csv`
-- [x] D1-07 建立能力—产品映射初稿｜证据：`docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv`、`docs/knowledge/LLMOPS_CAPABILITY_PRODUCT_MAPPING.csv`、`docs/knowledge/LLMOPS_COMBINATION_MAPPING.csv`
-- [x] D1-08 收集 30 条真实销售需求｜证据：PO 于 2026-09-02 决定首版用模拟问题替代，当前共 300 条单轮问题和 200 组双轮场景，按首版完成；这些不是实际客户数据，上线后继续收集真实错题
+- [x] D1-04 建立资料清单｜证据：`docs/TDH_SOURCE_INVENTORY.csv`、`docs/LLMOPS_SOURCE_INVENTORY.csv`、`docs/WUYA_SOURCE_INVENTORY.csv`
+- [x] D1-05 标记重复、过期和冲突资料｜证据：`docs/TDH_SOURCE_ASSESSMENT.md`、`docs/LLMOPS_SOURCE_ASSESSMENT.md`、`docs/WUYA_SOURCE_ASSESSMENT.md`
+- [x] D1-06 建立产品标准名及别名表｜证据：`CONTEXT.md`、`docs/knowledge/TDH_PRODUCT_ALIASES.csv`、`docs/knowledge/LLMOPS_PRODUCT_ALIASES.csv`、`docs/knowledge/WUYA_PRODUCT_ALIASES.csv`
+- [x] D1-07 建立能力—产品映射初稿｜证据：`docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv`、`docs/knowledge/LLMOPS_CAPABILITY_PRODUCT_MAPPING.csv`、`docs/knowledge/LLMOPS_COMBINATION_MAPPING.csv`、`docs/knowledge/WUYA_CAPABILITY_PRODUCT_MAPPING.csv`、`docs/knowledge/WUYA_COMBINATION_MAPPING.csv`
+- [x] D1-08 收集 30 条真实销售需求｜证据：PO 决定首版用已覆盖的模拟问题代替，当前共 400 条单轮问题和 300 组双轮场景，按首版完成；这些不是实际客户数据，上线后继续收集真实错题
 - [x] D1-09 创建 API 模式智能机器人｜证据：`src/cli/wecom-bot.ts`、提交 `12d96e0`
 - [x] D1-10 创建内部测试群并加入机器人｜证据：2026-09-02 企业微信内部测试群已收到机器人回复；运行状态记录见 `docs/PROGRESS_STATUS_2026-09-02.md`
 - [x] D1-11 验证长连接和凭证｜证据：2026-09-02 已验证认证、消息收发及自动重连；`src/cli/wecom-bot.ts`、提交 `12d96e0`
@@ -21,15 +21,15 @@
 
 ## 第 2 天
 
-- [x] D2-01 将 Excel、PPT、PDF 转换为可处理文本｜证据：首版选定资料已结构化为 `docs/knowledge/*.csv`；`docs/TDH_SOURCE_INVENTORY.csv`、`docs/LLMOPS_SOURCE_INVENTORY.csv`、`docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md`
-- [x] D2-02 删除重复、过期和禁止使用内容｜证据：`docs/TDH_SOURCE_ASSESSMENT.md`、`docs/LLMOPS_SOURCE_ASSESSMENT.md`、`docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md`（冲突资料保留风险标记，不作为确定承诺）
-- [x] D2-03 按产品、方案、场景、版本组织资料｜证据：`docs/knowledge/TDH_CAPABILITY_PRODUCT_MAPPING.csv`、`docs/knowledge/CROSS_PRODUCT_COMBINATION_MAPPING.csv`、`docs/knowledge/LLMOPS_CAPABILITY_PRODUCT_MAPPING.csv`、`docs/knowledge/LLMOPS_COMBINATION_MAPPING.csv`
+- [x] D2-01 将 Excel、PPT、PDF 转换为可处理文本｜证据：首版选定资料已结构化为 `docs/knowledge/*.csv`；三套逐文件清单及 `docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md`
+- [x] D2-02 删除重复、过期和禁止使用内容｜证据：`docs/TDH_SOURCE_ASSESSMENT.md`、`docs/LLMOPS_SOURCE_ASSESSMENT.md`、`docs/WUYA_SOURCE_ASSESSMENT.md`、`docs/CROSS_PRODUCT_SOURCE_ASSESSMENT.md`（冲突资料保留风险标记，不作为确定承诺）
+- [x] D2-03 按产品、方案、场景、版本组织资料｜证据：TDH、跨产品、LLMOps、无涯的 `docs/knowledge/*MAPPING.csv`
 - [x] D2-04 添加来源元数据｜证据：全部能力和组合映射均包含“资料来源”“审核状态”等字段
 - [x] D2-05 配置文档切分和知识索引｜证据：首版采用结构化映射行作为检索单元；`src/knowledge/loader.ts`、提交 `8d27d86`、`079a819`
 - [x] D2-06 配置检索与结果重排｜证据：`src/knowledge/retriever.ts`、`src/knowledge/knowledge.test.ts`、提交 `8d27d86`、`079a819`
 - [x] D2-07 配置回答模板｜证据：`src/model/answer-framework.ts`、`src/model/prompt.ts`、提交 `e2fbff4`、`6acffc4`
 - [x] D2-08 配置无答案与冲突处理规则｜证据：`src/model/answer-validator.ts`、`src/app/presales-assistant.ts`、提交 `504e957`
-- [x] D2-09 使用 30 条需求完成离线检索测试｜证据：300 条单轮问题和 200 组双轮场景；原核心产品检索 70/75（93.3%），LLMOps 可判断题 96/96 命中，双轮上下文均达到既定门槛
+- [x] D2-09 使用 30 条需求完成离线检索测试｜证据：400 条单轮问题和 300 组双轮场景；原核心产品检索 70/75（93.3%），LLMOps 与无涯各自可判断单轮题 96/96 命中，无涯双轮继承判断 100/100 正确
 - [x] D2-10 修正知识库并发布 V1｜证据：当前为可回滚的内部实验知识库 V1；提交 `8d27d86`、`cb109cd`、`079a819`（仍需产品专家确认后才能切生产口径）
 
 ## 第 3 天
@@ -42,14 +42,14 @@
 - [x] D3-06 实现短上下文追问｜证据：同群同用户、仅保留上一轮、30 分钟有效；提交 `3f52cb6`、`c8c2c57`、`5f9eb07`
 - [x] D3-07 实现超时、重试和错误提示｜证据：`src/model/openai-compatible-client.ts`、`src/wecom/message-handler.ts`
 - [x] D3-08 配置凭证安全和脱敏日志｜证据：`.env.example`、`src/wecom/safe-logger.ts`、`src/app/audit-logger.ts`、仓库密钥扫描测试
-- [ ] D3-09 完成 20 轮群内问答｜证据：测试脚本与验收记录模板已准备：`docs/LLMOPS_WECOM_UAT_20.md`；仍待使用轮换后的新凭证执行真实群测
+- [ ] D3-09 完成 20 轮群内问答｜证据：测试脚本与验收记录模板已准备：`docs/LLMOPS_WECOM_UAT_20.md`、`docs/WUYA_WECOM_UAT_20.md`；仍待使用轮换后的新凭证执行真实群测
 - [ ] D3-10 完成内部演示和问题登记｜证据：
 
 ## 第 4 天
 
-- [x] D4-01 将测试集扩充至 50 道｜证据：三批共 300 条单轮模拟问题，以及 200 组双轮上下文场景（待产品专家确认）；LLMOps 题库已汇总到 `outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/LLMOps_售前问题测试集.xlsx`
-- [x] D4-02 执行功能验收测试｜证据：内部自动化功能验收已通过；65 个 TypeScript 测试、18 个 Python 仓库测试、300 条单轮检索回归、200 组双轮上下文回归
-- [ ] D4-03 产品专家逐题复核｜证据：专家审核表已准备：`outputs/01a055c9-e0ea-79e0-948f-e234d5a08655/LLMOps_产品专家审核表.xlsx`；仍待专家填写和签字确认
+- [x] D4-01 将测试集扩充至 50 道｜证据：四批共 400 条单轮模拟问题、300 组双轮上下文场景；LLMOps 和无涯题库均已汇总为 8 工作表 Excel
+- [x] D4-02 执行功能验收测试｜证据：内部自动化功能验收已通过；69 个 TypeScript 测试、26 个 Python 仓库测试、400 条单轮检索回归、300 组双轮上下文回归
+- [ ] D4-03 产品专家逐题复核｜证据：LLMOps 与无涯专家审核表已准备；无涯表含 34 条功能映射和 15 条组合映射，仍待专家填写和签字确认
 - [ ] D4-04 修正错误知识和映射关系｜证据：
 - [x] D4-05 修正检索、提示词和回答格式｜证据：动态三类回答框架及单轮上下文已完成；提交 `e2fbff4`、`3f52cb6`、`c8c2c57`
 - [x] D4-06 测试资料外、模糊和错误前提问题｜证据：两批单轮测试集中的越界/错误前提场景，以及 `src/app/presales-assistant.test.ts`

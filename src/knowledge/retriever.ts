@@ -24,6 +24,9 @@ const conceptTerms: Record<string, string[]> = {
   knowledgeEngineering: ["知识库", "知识工程", "rag", "检索", "索引", "业务本体"],
   agentEngineering: ["agent", "数字员工", "vibe coding", "agentbox", "会话", "人工接管"],
   aiGovernance: ["catalog", "discover", "权限", "审计", "workspace", "secret", "资产"],
+  knowledgeQuestion: ["问知", "知识问答", "文档问答", "原文", "引用", "知识门户"],
+  dataQuestion: ["问数", "自然语言", "nl2sql", "sql", "图表", "看板", "分析主体"],
+  taskExecution: ["co-worker", "coworker", "xclaw", "执行", "催办", "回填", "erp", "oa", "skill"],
 };
 
 const explicitProducts = [
@@ -47,6 +50,13 @@ const explicitProducts = [
   "KB Agent",
   "Catalog",
   "Discover",
+  "无涯·问知",
+  "无涯·问数",
+  "知识门户",
+  "Co-Worker",
+  "XClaw",
+  "问知深度研究助手",
+  "无涯问知AI工作站",
 ];
 
 function isConfirmed(entry: KnowledgeEntry): boolean {

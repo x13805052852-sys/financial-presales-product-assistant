@@ -1,0 +1,23 @@
+﻿标准名称,实体类型,所属对象,英文名或License Code,可识别别名,禁止混用,首版使用规则,资料来源,确认状态
+TKH,产品平台,无涯,Transwarp Knowledge Hub,星环知识平台;星环知识管理平台;Knowledge Hub;THK,无涯·问知;无涯·问数,TKH 是包含问知、问数和知识门户的平台口径；THK 仅作为文件名疑似错拼识别,THK白皮书V3.0(简版).pdf#page=1-2;无涯问知AI工作站产品介绍202601.pptx#slide=2,待产品专家确认
+无涯·问知,产品,TKH,Infinity Intelligence,无涯问知;问知;Infinity;Infinity Intelligence;AI知识问答,无涯·问数;Co-Worker,用于多源多模态知识管理、RAG 问答、写作、审核和知识类助手,问知白皮书V2.0_20250718.pdf#page=3-12,待产品专家确认
+无涯·问数,产品,TKH,Transwarp Logits,无涯问数;问数;Logits;Infinity Logits;智能问数,无涯·问知;Co-Worker,用于自然语言查询结构化业务数据、分析和可视化,问数白皮书V2.0_20250718.pdf#page=4-9,待产品专家确认
+知识门户,产品模块,TKH,Knowledge Portal,企业知识门户;知识管理门户;知识探索门户,个人知识库;Co-Worker,用于企业知识编目、统一权限、检索和共享，不等同于单次问答,问知白皮书V2.0_20250718.pdf#page=6,待产品专家确认
+问知常规问答助手,应用类型,无涯·问知,QA Assistant,常规问答类AI助手;问答助手;客服助手;法规咨询助手,深度研究助手;Co-Worker数字员工,适合高频标准化问答，通过指令、知识源和开场白快速配置,问知白皮书V2.0_20250718.pdf#page=9,待产品专家确认
+问知深度研究助手,应用类型,无涯·问知,Deep Research Assistant,深度研究;深度研究类AI助手;研究助手;企业研究助手,常规问答助手;无涯·问数,用于多源、多工具、可配置研究框架和报告大纲的复杂研究任务,无涯问知深度研究助手产品介绍.pptx#slide=1-6;问知白皮书V2.0_20250718.pdf#page=9,待产品专家确认
+无涯问知AI工作站,交付形态,无涯·问知,AI Workstation,AI工作站;问知工作站;桌面级一体机,AIPC版;普通服务器部署,表示软硬件一体、开箱即用的团队知识问答交付形态，配置和并发需按正式方案确认,无涯问知AI工作站产品介绍202601.pptx#slide=1-3,待产品专家确认
+问知企业版,部署版本,无涯·问知,Enterprise Edition,企业版;私有化版;企业私有知识库,云端版;AIPC版,强调企业本地化部署、组织知识库和权限管理,问知白皮书V2.0_20250718.pdf#page=4,待产品专家确认
+问知AIPC版,部署版本,无涯·问知,AIPC Edition,AIPC;AIPC本地版;个人电脑版本,AI工作站;企业版;云端版,运行于个人电脑，侧重本地隐私与个人使用；具体模型和联网方式按版本确认,问知白皮书V2.0_20250718.pdf#page=4,待产品专家确认
+问知云端版,部署版本,无涯·问知,Cloud Edition,云端版;公有云版;无涯云,企业版;AIPC版,适合快速开通；预置财经法律等数据与私有化能力不可混用,问知白皮书V2.0_20250718.pdf#page=4-5,待产品专家确认
+Opcode Engine,核心技术,无涯·问数,Opcode Engine,Opcode;SQL双向解析;可视化SQL,NL2SQL模型;TDS,负责 SQL 与前端可编辑分析指令之间的双向解析，不是独立产品,问数白皮书V2.0_20250718.pdf#page=5,待产品专家确认
+分析主体,数据对象,无涯·问数,Subject,业务主体;数据主体;多表主体;SQL主体,分析场景;指标,把表、字段、关联、指标和业务语义组织成问数可理解对象,问数白皮书V2.0_20250718.pdf#page=5;page=8;无涯问数事项跟踪2026_功能清单及数据库支持清单_更新至2.X.0.xlsx#sheet=功能清单,待产品专家确认
+分析场景,应用对象,无涯·问数,Analysis Scene,问数场景;智能场景;业务分析场景,分析主体;看板,组合主体、知识库、常见问题和权限形成可发布的问数场景,无涯问数事项跟踪2026_功能清单及数据库支持清单_更新至2.X.0.xlsx#sheet=功能清单,待产品专家确认
+Co-Worker,产品,无涯,Transwarp Co-Worker,Coworker;CoWorker;AI同事;企业级AI协同办公平台,无涯·问知;无涯·问数;Agent Buddy,用于跨文件、系统和工具执行多步骤办公任务，当前材料日期为 2026-08-11,Co-Worker.pptx#slide=1-2,待产品专家确认
+XClaw,历史或关联名称,无涯,Transwarp XClaw,xclaw;OpenClaw;无涯龙虾;龙虾,Co-Worker,识别客户旧称或 OpenClaw 方案；与 Co-Worker 的正式继承或改名关系必须追问版本并由产品确认,Co-Worker.pptx#slide=11;Co-Worker白皮书（未转曲预览）7.13.pdf#page=1-2,待产品专家确认
+Co-Worker数字员工,能力对象,Co-Worker,Digital Employee,数字员工;AI员工;AI同事;岗位智能体,Agent Buddy;聊天机器人,表示按职责、流程、权限和确认节点完成任务的 Co-Worker 工作单元,Co-Worker.pptx#slide=2;slide=7,待产品专家确认
+Skill,能力资产,Co-Worker,Skill,技能;工作流;一句话工作流;能力包,工具;数字员工,用于沉淀可复用流程和经验；不是底层工具本身，也不代表免审核上线,Co-Worker.pptx#slide=7;slide=9,待产品专家确认
+Skill Hub,能力模块,Co-Worker,Skill Hub,技能商城;技能市场;企业技能库,Skill;AgentBox,用于 Skill 审核、上架、分发、权限、版本和审计,Co-Worker.pptx#slide=2;slide=9,待产品专家确认
+Cosmic,核心技术,Co-Worker,Cosmic,Cosmic解析引擎;文档解析引擎;多模态解析器,无涯·问知;知识库,用于文档版面、文字、表格、公式和扫描件解析；性能数字需带测试环境,Co-Worker.pptx#slide=6,待产品专家确认
+Astro,外部组合产品,星环产品矩阵,Astro,智能数据治理;治理智能体,无涯·问数;TDS,在 Co-Worker 组合中承担智能数据治理 Agent，治理执行与落库仍需明确 TDS 等专业工具,Co-Worker.pptx#slide=2,待产品专家确认
+Sophon LLMOps,外部组合产品,星环产品矩阵,Sophon LLMOps,LLMOps;大模型运营平台;模型服务,无涯·问知;TDC AI服务版,为 Co-Worker 或无涯应用提供算力与模型服务；不替代业务应用,Co-Worker.pptx#slide=2,待产品专家确认
+TDC AI服务版,外部组合产品,星环产品矩阵,TDC AI,TDC AI;AI服务版;算力多租户平台,Sophon LLMOps;无涯,用于企业 AI 服务与算力底座；与 LLMOps 的产品边界按项目确认,Co-Worker.pptx#slide=2,待产品专家确认
