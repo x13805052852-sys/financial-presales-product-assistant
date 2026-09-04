@@ -140,13 +140,24 @@ class RepositoryQualityTests(unittest.TestCase):
                     "100条单轮问题",
                     "100组双轮上下文",
                     "20轮企微验收",
+                    "LLMOps功能映射",
                     "LLMOps组合映射",
+                    "产品及组件别名",
                     "分类统计",
                     "使用说明",
                 ],
                 names,
             )
-            expected_shapes = [(101, "S"), (101, "P"), (21, "M"), (16, "O"), (20, "E"), (13, "B")]
+            expected_shapes = [
+                (101, "X"),
+                (101, "X"),
+                (21, "R"),
+                (35, "J"),
+                (16, "O"),
+                (25, "I"),
+                (30, "H"),
+                (20, "B"),
+            ]
             actual_shapes = []
             for number, (_, last_column) in enumerate(expected_shapes, start=1):
                 sheet_xml = workbook.read(f"xl/worksheets/sheet{number}.xml")

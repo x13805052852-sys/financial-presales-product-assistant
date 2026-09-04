@@ -25,8 +25,9 @@
 6. 将 LLMOps 产品域、组件、能力和组合接入现有知识加载器、检索器和上下文识别。
 7. 生成 LLMOps 产品专家审核表，集中呈现 34 条功能映射和 15 条组合映射，带审核下拉项、可对客标记和自动进度汇总。
 8. 准备 LLMOps 企业微信 20 轮真实问答验收脚本，覆盖产品选型、功能介绍、风险边界、版本、单轮上下文和敏感信息拒答。
-9. 生成 LLMOps 售前问题测试集 Excel，统一承载 100 条单轮题、100 组双轮题、20 轮企微验收、15 条组合映射、公式统计和使用说明。
-7. 明确 Corpus Studio、Model Foundry、Knowledge Lodge、Agent Go、AI Infra 五个产品域，以及 TokenFactory、AgentBox、Agent Buddy、Agent Session Manager、KB Agent、Catalog 和 Discover 的归属。
+9. 生成并细化 LLMOps 售前问题测试集 Excel，统一承载 100 条单轮题、100 组双轮题、20 轮企微验收、34 条功能映射、15 条组合映射、24 条产品及组件别名、完整公式统计和使用说明。
+10. 单轮题增加产品分工、回答框架、分工完整性、版本冲突和推荐置信度；双轮题增加补全问题、继承理由、实际识别结果和错误类型。
+11. 明确 Corpus Studio、Model Foundry、Knowledge Lodge、Agent Go、AI Infra 五个产品域，以及 TokenFactory、AgentBox、Agent Buddy、Agent Session Manager、KB Agent、Catalog 和 Discover 的归属。
 
 ## 当前测试覆盖
 
@@ -37,7 +38,7 @@
 | LLMOps 单轮模拟销售问题 | 100 条 |
 | 通用双轮上下文场景 | 100 组 |
 | LLMOps 双轮上下文场景 | 100 组 |
-| LLMOps 问题 Excel 工作表 | 6 个 |
+| LLMOps 问题 Excel 工作表 | 8 个 |
 | LLMOps 可判断题映射命中 | 96/96，**100%** |
 | LLMOps 题目来源可追溯 | 100/100 |
 | TypeScript 自动测试 | 65 个通过 |
